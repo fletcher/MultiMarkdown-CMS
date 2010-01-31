@@ -1,0 +1,5 @@
+Title:	Another Sample posting  
+Date:	01/31/2010 15:59:56 
+Tags:	MultiMarkdown
+
+Another sample post.

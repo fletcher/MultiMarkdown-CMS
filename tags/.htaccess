@@ -1,0 +1,18 @@
+Options +Includes
+Options +FollowSymLinks +ExecCGI
+<limit GET POST PUT>
+        order allow,deny
+        allow from all
+</limit>
+
+
+# TagMap
+RewriteCond %{REQUEST_URI} ^/tags\/?$
+RewriteRule ^(.*)$ /tags/tagmap.html [L,QSA]
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /tags/index.html?query=$1 [L,QSA]
+

@@ -1,0 +1,105 @@
+#	.htaccess file for MultiMarkdown based CMS
+#
+#	Copyright (c) 2010 by Fletcher T. Penney
+#
+#	<http://fletcherpenney.net/>
+#
+
+# 	To configure this file for your site, look for lines containing:
+#	"Customize this"
+#
+
+# Customizable Settings
+
+SetEnv TZ US/Eastern
+
+
+# General Settings
+
+Options +Includes
+XBitHack Full
+ErrorDocument 404 /notfound.html
+
+AddCharset UTF-8 .html
+
+AddHandler server-parsed .html
+
+
+# What files should we use to index directories?
+
+DirectoryIndex index index.xhtml index.html
+
+
+# Pass requests to proper files
+RewriteEngine on
+
+# If the .html file exists, use it
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L,QSA]
+
+# If the directory exists, use the index.html for that directory
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)$ $1/index.html [L,QSA]
+
+
+# Pass requests for atom.xml to the script
+
+RewriteCond %{REQUEST_FILENAME} /atom.xml
+RewriteRule ^(.*)$ /cgi/atom.cgi [L,QSA,T=application/xml;charset=UTF-8]
+
+RewriteCond %{REQUEST_URI} /cgi/atom.cgi
+RewriteRule .* - [T=application/xml;charset=UTF-8]
+
+
+# Ditto for atom-comments.xml
+
+RewriteCond %{REQUEST_FILENAME} /atom-comments.xml
+RewriteRule ^(.*)$ /cgi/atom-comments.cgi [L,QSA,T=application/xml;charset=UTF-8]
+
+RewriteCond %{REQUEST_URI} /cgi/atom-comments.cgi
+RewriteRule .* - [T=application/xml;charset=UTF-8]
+
+
+# Google Sitemap to allow better indexing
+# Add /sitemap.xml to your google webmaster tools
+# https://www.google.com/webmasters/tools/sitemap-list
+
+RewriteCond %{REQUEST_FILENAME} /sitemap.xml
+RewriteRule ^(.*)$ /cgi/google_sitemap.cgi [L,QSA,T=application/xml;charset=UTF-8]
+
+RewriteCond %{REQUEST_URI} /cgi/google_sitemap.cgi
+RewriteRule .* - [T=application/xml;charset=UTF-8]
+
+
+# Archives template
+# URLS that look like /YYYY/ or /YYYY/MM/ are passed to archives.html
+
+RewriteCond %{REQUEST_URI} ^/[0-9][0-9][0-9][0-9](/[0-9][0-9])?//?index.html$
+RewriteRule ^(.*)$ /templates/archives.html
+
+RewriteCond %{REQUEST_URI} ^/archives\/?
+RewriteRule ^(.*)$ /templates/archives.html
+
+
+# TagMap
+RewriteCond %{REQUEST_URI} ^/tags\/?$
+RewriteRule ^(.*)$ /templates/tagmap.html
+
+
+# FINALLY!!!!
+#	Send proper mime type for XHTML!!!
+# 
+# Thanks to:
+# http://bitworking.org/news/134/Content-Negotiation-Considered-Harmful-Again
+#
+
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
+RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
+RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
+RewriteCond %{REQUEST_URI} \.html$
+RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]
+RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
+RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
+RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
+RewriteCond %{REQUEST_URI} !\.
+RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]

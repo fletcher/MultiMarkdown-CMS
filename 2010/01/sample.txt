@@ -1,0 +1,6 @@
+Title:	Sample posting  
+Date:	01/31/2010 15:21:06 
+Tags:	MultiMarkdown
+
+This is a sample post.
+

@@ -1,0 +1,81 @@
+/*	CSS System
+
+	Copyright (c) 2009 Fletcher T. Penney
+		<http://fletcherpenney.net/>
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Default Settings */
+
+body {
+	padding:2% 5%;
+	margin:0;
+	text-align: center;
+}
+
+div {
+	text-align: left;	
+}
+
+div.header {
+	background-position: -10px 0px;
+	position: relative;
+	padding: 10px 10px 0px 10px;
+	margin-bottom: 2.25em;
+	max-width:60em;
+	min-width:640px;
+	margin:auto;
+}
+
+div.wrapper {
+	font-size:1em;
+	max-width:54em;
+	min-width:740px;
+	margin: auto;
+}
+
+div.content {
+	margin-right: 10em; 
+	max-width:35em;
+}
+
+div.sidebar {
+	font-size:1em;
+	float: right;
+	width: 14em;
+	padding:5px;
+}
+
+div.footer {
+	max-width:60em;
+	min-width:640px;
+	font-size:0.75em;
+	clear:both;
+	margin:auto;
+}
+
+textarea[name="text"] {
+	width:110%;
+}
+textarea[name="summary"] {
+	width:100%;
+}
+input[type="text"] {
+	display: block;
+}
+
+
+/* Insert your CSS here... */
+

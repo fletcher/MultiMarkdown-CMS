@@ -1,0 +1,8 @@
+
+Options +ExecCGI
+
+# Block access to .pl files (local use only)
+<Files ~ "\.pl$">
+Order allow,deny
+Deny from all
+</Files>

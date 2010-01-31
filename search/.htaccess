@@ -1,0 +1,13 @@
+Options +Includes
+Options +FollowSymLinks +ExecCGI
+<limit GET POST PUT>
+        order allow,deny
+        allow from all
+</limit>
+
+
+#RewriteEngine on
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ /query/index.html?query=$1 [L,QSA]
+

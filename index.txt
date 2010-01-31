@@ -1,0 +1,9 @@
+Title: MultiMarkdown-based CMS
+Tags:
+
+This is the default page for the MultiMarkdown-based Content Management
+System...
+
+Learn more at <http://fletcherpenney.net/multimarkdown/cms/>.
+
+<!--#include virtual="/cgi/latest_stories.cgi" -->
