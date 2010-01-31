@@ -1,6 +1,6 @@
-Title:	MultiMarkdown CMS
-Author:	Fletcher T. Penney
-Date:	January 31, 2010
+Title:	MultiMarkdown CMS  
+Author:	Fletcher T. Penney  
+Date:	January 31, 2010  
 
 
 # Introduction #
@@ -31,7 +31,19 @@ certain templates to the page. This allows you to standardize the appearance
 of each page (e.g. headers, footers, sidebar, etc).
 
 Additionally, CGI scripts are included to manage archives, Atom feeds, tags,
-searching, OpenID authentication, and more.
+searching, OpenID authentication, comments, and more.
+
+However, keep in mind that my goal is simplicity. I don't want lots of
+plugins, extensions, modules, etc. I don't want lots of different themes that
+I can choose from. If you want these things, then another package might be for
+you. But if you want a simple method of creating a web site that focuses on
+content, this may be for you.
+
+This package certainly requires more tinkering than a prebuilt solution. If
+you're not familiar with .htaccess files, configuring apache, changing file
+permissions, and examining error logs then you might run into some roadblocks.
+However, that could also be considered an opportunity to track down solutions!
+
 
 # Where to download #
 
