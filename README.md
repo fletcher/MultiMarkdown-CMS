@@ -237,7 +237,7 @@ and then put the following in the file:
 	#
 	cd /path/to/public
 	/usr/bin/env -i /usr/local/bin/git reset --hard
-	chmod g+s templates/accept_comment.cgi
+	chmod g+s cgi/accept_comment.cgi
 
 What this does is force git on the remote server to reset the remote directory
 to match the state of the repository itself. Then I change the permissions on
