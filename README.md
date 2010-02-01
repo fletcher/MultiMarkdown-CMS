@@ -1,7 +1,7 @@
 Title:	MultiMarkdown CMS  
 Author:	Fletcher T. Penney  
 Date:	January 31, 2010  
-CSS:	http://fletcherpenney.net/css/document.css
+Tags:	MultiMarkdown, web, server  
 
 # Introduction #
 
@@ -33,6 +33,14 @@ of each page (e.g. headers, footers, sidebar, etc).
 Additionally, CGI scripts are included to manage archives, Atom feeds, tags,
 searching, OpenID authentication, comments, and more.
 
+When building the system, I started off with a collection of essentially
+static web pages. I then added cgi scripts only where I thought they were
+absolutely necessary to give my site the interactive features I desired. If
+you're someone who likes lots of widgets and gadgets on their site --- I won't
+be programming them. However, because of the simple philosophy behind this
+approach, the pages should be compatible with just about anything you want to
+add that doesn't require a backend database.
+
 However, keep in mind that my goal is simplicity. I don't want lots of
 plugins, extensions, modules, etc. I don't want lots of different themes that
 I can choose from. If you want these things, then another package might be for
@@ -43,6 +51,7 @@ This package certainly requires more tinkering than a prebuilt solution. If
 you're not familiar with .htaccess files, configuring apache, changing file
 permissions, and examining error logs then you might run into some roadblocks.
 However, that could also be considered an opportunity to track down solutions!
+
 
 # Where do I get it? #
 
