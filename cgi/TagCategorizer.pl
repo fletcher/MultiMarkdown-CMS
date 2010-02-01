@@ -1,8 +1,9 @@
 #!/usr/bin/env perl
 #
-# TagCategorizer Version 1.0
+# TagCategorizer Version 1.01
 #
-# Copyright (C) 2005  Fletcher T. Penney <http://fletcher.freeshell.org/>
+# Copyright (C) 2005-2010  Fletcher T. Penney
+#	<http://fletcherpenney.net/>
 # 
 # Given a list of objects and their associated tags, use this information
 # to develop a graph of the relationships between tags

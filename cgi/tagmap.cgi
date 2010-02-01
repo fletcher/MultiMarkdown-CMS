@@ -1,5 +1,24 @@
 #!/usr/bin/env perl
 
+# Copyright (C) 2010  Fletcher T. Penney <fletcher@fletcherpenney.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the
+#    Free Software Foundation, Inc.
+#    59 Temple Place, Suite 330
+#    Boston, MA 02111-1307 USA
+
+
 use File::Basename;
 use File::Path;
 use Cwd 'abs_path';
@@ -11,7 +30,17 @@ my $cgi = CGI::new();
 my $content = "";
 
 # Web root folder
-my $search_path = $ENV{DOCUMENT_ROOT} || "/Users/fletcher/Sites/mmd_static";
+my $search_path = "";
+
+if ($ENV{DOCUMENT_ROOT}) {
+	$search_path = $ENV{DOCUMENT_ROOT};
+} else {
+	my $me = $0;		# Where is this script located?
+	$me = dirname($me);
+	$me = abs_path($me);
+	($search_path = $me) =~ s/\/cgi$//;
+}
+
 
 print "Content-type: text/html\n\n";
 
