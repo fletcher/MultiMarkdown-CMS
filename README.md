@@ -311,7 +311,7 @@ Used to find similar pages, and perform searches of site content.
 Used by my VectorMap searching software to improve results
 
 
-## MultiMarkdown [MMD] ##
+## MultiMarkdown ##
 
 * by Fletcher T. Penney
 * <http://fletcherpenney.net/multimarkdown/>
