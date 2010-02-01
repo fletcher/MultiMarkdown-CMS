@@ -1,7 +1,7 @@
 Title:	MultiMarkdown CMS  
 Author:	Fletcher T. Penney  
 Date:	January 31, 2010  
-
+CSS:	http://fletcherpenney.net/css/document.css
 
 # Introduction #
 
@@ -26,7 +26,7 @@ The basic premise is:
 * upload the XHTML file (and optionally the txt file) to your web server, and
   you're off
 
-The newly formated XHTML file includes SSI code that causes Apache to add
+The newly formatted XHTML file includes SSI code that causes Apache to add
 certain templates to the page. This allows you to standardize the appearance
 of each page (e.g. headers, footers, sidebar, etc).
 
@@ -44,13 +44,92 @@ you're not familiar with .htaccess files, configuring apache, changing file
 permissions, and examining error logs then you might run into some roadblocks.
 However, that could also be considered an opportunity to track down solutions!
 
+# Where do I get it? #
 
-# Where to download #
+
+You can download the package:
+
+<http://github.com/fletcher/MultiMarkdown-CMS>
+
+You can also use git to clone the source:
+
+	git clone git://github.com/fletcher/MultiMarkdown-CMS.git
+
+If you know how to use git, I recommend that approach for reasons that will
+become clear later.
 
 
-# How to install #
+# How do I install it? #
+
+Once you download and unpack the software, place the directory where your web
+server software expects it.
+
+*Please note: if you have trouble installing the software, do a web search to
+figure out what to do. I'm happy to help troubleshoot my software, but I don't
+want to get into trying to troubleshoot everyone's web server setup....*
+
+
+For example, I place mine in `/Users/fletcher/Sites/mmd-static`.
+
+
+You should now be able to go to something like:
+
+	http://127.0.0.1/~fletcher/mmd_static/index.html
+
+And see *something* --- it will likely give you some error messages, however.
+
 
 # How to configure Apache #
+
+By default, MultiMarkdown CMS expects to be at the "root" of your web server,
+not tucked away at `/~fletcher/mmd_static/`.
+
+To fix this, we need to configure a virtual host in Apache, or your web server
+of choice.
+
+For Apache 2 on a Mac, do the following (all others will need to seek help
+elsewhere):
+
+* as an admin, go to `/etc/apache2/extra`
+* `sudo pico httpd-vhosts.conf` (or similar)
+* add something like the following at the end of the file:
+
+		<VirtualHost *:80>
+			DocumentRoot "/Users/fletcher/Sites/mmd_static"
+			ServerName mmd.local
+		</VirtualHost>
+
+then add the following to `/etc/hosts`:
+
+	127.0.0.1       mmd.local
+
+If you restart Web Sharing in the control panel, you should now be able to
+access your site by pointing your browser to <http://mmd.local/>. It should
+look much better than the first time, but the default CSS is *ugly*. There are
+two sample articles, and one sample tag, to get you started.
+
+
+# How do I add content to my site? #
+
+You can add content anywhere within the MultiMarkdown CMS directory. You can
+create folders, and bury your content away. Keep in mind that the archives
+feature only locates pages in a `/YYYY/MM/` folder, e.g. the sample posts in
+`/2010/01/`. Other folders are not treated as "blog posts". My site is an
+example of this structure.
+
+To process the files into HTML, you need to have a working installation of
+[MultiMarkdown](http://fletcherpenney.net/multimarkdown/).
+
+Once you add the text files, you need to run `mmd2web.pl` to create an
+appropriate html file. This uses the `xhtml-static-site.xslt` file to add the
+appropriate templates to your documents. You will also need to change the
+permissions on your `.html` files so that the execute bit is enabled (because
+I use
+[XBitHack](http://httpd.apache.org/docs/1.3/mod/mod_include.html#xbithack) to
+enable SSI without screwing everything else up).
+
+Now you just need to customize your templates and CSS files to make everything
+look pretty....
 
 
 # Features #
