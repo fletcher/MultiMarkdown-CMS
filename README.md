@@ -1,4 +1,4 @@
-Title:	MultiMarkdown CMS  
+Title:	MultiMarkdown-CMS  
 Author:	Fletcher T. Penney  
 Date:	January 31, 2010  
 Tags:	MultiMarkdown, web, server  
@@ -257,7 +257,9 @@ Remember, since you have a read-only connection to my github repository, your
 changes and private files cannot be uploaded. You can still use `git pull
 origin master` to update to the latest version of software I have released.
 This should not overwrite any changes you have made, since git is pretty good
-at avoiding "collisions".
+at avoiding "collisions". I've only been using this "triple repository"
+approach for a little while, but so far it's been convenient in allowing me to
+keep private and public files separate.
 
 **NOTE**: This set-up works for me. I don't promise it will work for you, or
 that it won't mess something up. I am not a git expert. I simply patched this
