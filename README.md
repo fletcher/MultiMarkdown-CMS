@@ -317,9 +317,7 @@ Used by my VectorMap searching software to improve results
 * <http://fletcherpenney.net/multimarkdown/>
 
 MultiMarkdown is my update to John Gruber's
-[Markdown](http://daringfireball.net/projects/markdown/) software. It is what
-this bundle is based on. To learn more about why you would want to use this
-bundle, check out the web page for MultiMarkdown.
+[Markdown](http://daringfireball.net/projects/markdown/) software.
 
 
 ## SmartyPants ##
