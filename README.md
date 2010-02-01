@@ -113,7 +113,7 @@ then add the following to `/etc/hosts`:
 	127.0.0.1       mmd.local
 
 If you restart Web Sharing in the control panel, you should now be able to
-access your site by pointing your browser to <http://mmd.local/>. It should
+access your site by pointing your browser to `http://mmd.local/`. It should
 look much better than the first time, but the default CSS is *ugly*. There are
 two sample articles, and one sample tag, to get you started.
 
