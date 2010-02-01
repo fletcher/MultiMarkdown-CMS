@@ -144,13 +144,125 @@ look pretty....
 # Features #
 
 
+Included with MultiMarkdown-CMS are several cgi scripts that add additional
+features:
+
+* pages in the `/YYYY/MM/` hierarchy are treated as "blog posts" - organized
+  by date
+
+* an archive of blog posts is available at `/archives/`, you can also go to
+  any year or year/month and see a list of posts in that month
+
+* visitors can leave comments on any blog post (by default comments are not
+  accepted on other pages)
+
+* visitors are authenticated via OpenID for leaving comments
+
+* two Atom feeds are generated automatically - one for blog posts, and one for
+  comments
+
+* `/sitemap.xml` generates a Google compatible sitemap of the content of your
+  site
+
+* by default, the home page lists the last 15 blog posts
+
+* by default, `index.html` pages show a list of the other pages within that
+  folder
+
+* a built-in search function is available (though setting up a [Custom Search Engine](http://www.google.com/cse/) isn't a bad idea either)
+
+* a list of similar pages can be added to each page in the site
+
+* several tag related features are available automatically
+
+These features are all demonstrated by the default configuration - feel free
+to modify the scripts as needed for your own requirements.
+
+
 # Settings #
 
-OpenID password
+There are a couple of configuration changes that should be done before going
+live with this software:
 
-htaccess Timezone
+* the root `.htaccess` file should be changed to reflect your desired time
+  zone
+
+* four files in `/cgi/` contain the phrase "enter your password here" --- this
+  should be changed to a private passphrase for better security when handling
+  OpenID authentication
 
 
+Obviously, I recommend improving the CSS design, and tweaking the various
+templates to construct the look of your site.
+
+
+# Advanced use of git #
+
+One of the things I really wanted to be able to do was to manage my site on my
+laptop, experiment with it to be sure it works after any changes are made, and
+only then to upload my changes to the live server. I have tried to design the
+cgi scripts so that they configure themselves as much as possible, so that the
+same code can be run locally, or from a production server.
+
+My workflow is that I make changes in `/Users/fletcher/Sites/mmd_static/` as
+described above. That directory was created as a git clone of the
+MultiMarkdown-CMS software(as above).
+
+I then add a remote repository to the git repo:
+
+	git remote add live ssh://user@my.live.host/path/to/public
+
+where the username and host are what I would normally use to ssh into my web
+provider. `/path/to/public` is the path to the directory that holds my web
+site.
+
+This allows me to use git to upload a copy of my local site to my web host
+when I am satisfied with the changes. Additionally, by storing my web site in
+a git repository, I can undo changes when I make a mistake, and I can also go
+back to any previous version of my site.
+
+One trick, though, is that you have to configure the remote repository to
+update the remote copies of all files after every `git push`. To do this, ssh
+into your account, and go to the public directory. (You may want to back
+everything up at this point....) Then do the following to create the remote
+git repository:
+
+	git init
+	cd .git/hooks
+	pico post-update
+
+and then put the following in the file:
+
+	#!/bin/sh
+	#
+	cd /path/to/public
+	/usr/bin/env -i /usr/local/bin/git reset --hard
+	chmod g+s templates/accept_comment.cgi
+
+What this does is force git on the remote server to reset the remote directory
+to match the state of the repository itself. Then I change the permissions on
+accept_comment.cgi so that it is permission to write to the comments files.
+
+You can, of course, add your own commands to this file as well.
+
+If you use the same approach, whenever you want to upload your changes, simply
+type:
+
+	git push live master
+
+Your changes will be uploaded, then the remote repository will be reset so
+it's up to date, and the permissions will be fixed on accept_comment.cgi.
+
+Remember, since you have a read-only connection to my github repository, your
+changes and private files cannot be uploaded. You can still use `git pull
+origin master` to update to the latest version of software I have released.
+This should not overwrite any changes you have made, since git is pretty good
+at avoiding "collisions".
+
+**NOTE**: This set-up works for me. I don't promise it will work for you, or
+that it won't mess something up. I am not a git expert. I simply patched this
+together with a lot of help from Google. I can't really offer any support if
+it's not working for you.
 
 
 # Included Software #
