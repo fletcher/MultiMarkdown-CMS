@@ -170,7 +170,7 @@ unless ($@) {
 		my $plugin = new MT::Plugin({
 			name => "MultiMarkdown",
 			description => "Based on the original Markdown",
-			doc_link => 'http://fletcherpenney.net/MultiMarkdown/'
+			doc_link => 'http://fletcherpenney.net/multimarkdown/'
 		});
 		MT->add_plugin( $plugin );
 	}
@@ -1795,7 +1795,7 @@ sub _DoFootnotes {
 	$text =~ s{
 		\[\^(.+?)\]		# id = $1
 	}{
-		my $result;
+		my $result = "";
 		my $id = id2footnote($1);
 		if (defined $g_footnotes{$id} ) {
 			$g_footnote_counter++;
@@ -2015,19 +2015,21 @@ sub _DoTables {
 		
 		# Add Caption, if present
 		
-		if ($table =~ s/^$line_start\[\s*(.*?)\s*\](\[\s*(.*?)\s*\])?[ \t]*$//m) {
+		if ($table =~ s/^$line_start(?:\[\s*(.*)\s*\])?(?:\[\s*(.*?)\s*\])[ \t]*$//m) {
 			my $table_id = "";
-			if (defined $3) {
-				# add caption id to cross-ref list
-				$table_id = Header2Label($3);
+			my $table_caption = "";
+
+			$table_id = Header2Label($2);
+
+			if (defined $1) {
+				$table_caption = $1;
 			} else {
-				# use caption as the id
-				$table_id = Header2Label($1);
+				$table_caption = $2;
 			}
-			$result .= "<caption id=\"$table_id\">" . _RunSpanGamut($1). "</caption>\n";
+			$result .= "<caption id=\"$table_id\">" . _RunSpanGamut($table_caption). "</caption>\n";
 				
 			$g_crossrefs{$table_id} = "#$table_id";
-			$g_titles{$table_id} = "$1";
+			$g_titles{$table_id} = "see table";		# captions with "stuff" in them break links
 		}
 				
 		# If a second "caption" is present, treat it as a summary
@@ -2481,8 +2483,8 @@ sub _DoDefinitionLists {
 	my $definition = qr{
 		\n?[ ]{0,$less_than_tab}
 		\:[ \t]+(.*?)\n
-		((?=\n*[ ]{0,$less_than_tab}\S)|\n\n|\Z)	# Lookahead for non-space at line-start,
-		 											# two returns, or end of doc
+		((?=\n?\:)|\n|\Z)	# Lookahead for next definition, two returns,
+							# or the end of the document
 	}sx;
 	
 	my $definition_block = qr{
