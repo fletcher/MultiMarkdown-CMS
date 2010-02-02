@@ -28,7 +28,7 @@ if ($ENV{DOCUMENT_URI} eq "/index.html") {
 	exit;
 }
 
-(my $uri = $ENV{REQUEST_URI}) =~ s/\/*(index.html)$/\//;
+(my $uri = $ENV{REQUEST_URI}) =~ s/\/*(index.html)?$/\//;
 
 # Where am I called from
 my $search_path = $ENV{DOCUMENT_ROOT} . $ENV{DOCUMENT_URI};
