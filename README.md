@@ -101,7 +101,9 @@ elsewhere):
 
 * as an admin, go to `/etc/apache2/extra`
 * `sudo pico httpd-vhosts.conf` (or similar)
-* add something like the following at the end of the file:
+* comment out the existing virtualhost sections (add a "#" at the beginning of 
+  the line)
+* then, add something like the following at the end of the file:
 
 		<VirtualHost *:80>
 			DocumentRoot "/Users/fletcher/Sites/mmd_static"
