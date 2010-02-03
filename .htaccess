@@ -111,6 +111,9 @@ RewriteRule ^(.*)$ /templates/tagmap.html
 # Thanks to:
 # http://bitworking.org/news/134/Content-Negotiation-Considered-Harmful-Again
 #
+# To serve your website in HTML instead of XHTML, comment out or delete the 
+# following lines.  FYI - MathML will not work properly in HTML, but
+# everything else should.
 
 RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
 RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
