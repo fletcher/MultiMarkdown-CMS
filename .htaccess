@@ -35,14 +35,14 @@ SetEnv TZ US/Eastern
 
 # General Settings
 
-Options +Includes +FollowSymLinks
+Options +Includes +FollowSymLinks +ExecCGI
 XBitHack Full
 ErrorDocument 404 /notfound.html
 
 AddCharset UTF-8 .html
 
 AddHandler server-parsed .html
-
+AddHandler cgi-script .cgi
 
 # What files should we use to index directories?
 
