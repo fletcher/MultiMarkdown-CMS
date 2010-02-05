@@ -42,7 +42,7 @@ my @months = qw(January February March April May June July August
 
 local $/;
 
-if ($requested_url =~ /^\/?(\d\d\d\d).*\d\d/) {
+if ($requested_url =~ /^\/?(\d\d\d\d).*?(\d\d)/) {
 	my $year = $1;
 	my $month = $2;
 	# Print entries in the current month
