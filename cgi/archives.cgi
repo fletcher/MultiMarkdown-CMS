@@ -43,9 +43,12 @@ my @months = qw(January February March April May June July August
 local $/;
 
 if ($requested_url =~ /^\/?(\d\d\d\d).*\d\d/) {
+	my $year = $1;
+	my $month = $2;
 	# Print entries in the current month
 	my %pages = ();
-	foreach my $filepath (glob("$site_root$requested_url*.html")) {
+
+	foreach my $filepath (glob("$site_root/$year/$month/*.html")) {
 		if ($filepath !~ /index.html$/) {
 			open (FILE, "<$filepath");
 			my $data = <FILE>;
