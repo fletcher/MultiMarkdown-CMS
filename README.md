@@ -101,14 +101,56 @@ becomes
 On a mac, for example, you would modify `/etc/apache2/users/username.conf`.
 
 
-The advanced version, however, requires that it be accessed at the root of the
-server, e.g. "http://example.com/" instead of "http://example.com/folder/".
-Depending on your web server, this may mean that you need to create a virtual
-host to point to your installation. Exactly how to do that is beyond the scope
-of this document. The main advantage of the advanced version is that you can
-use anchors that point within the page, e.g. `<a href="#footnote"/>`. These
-anchors break on the standard version. They are used by MultiMarkdown when
-creating footnotes, citations, and linking to sections within the document.
+There are two versions of the software --- the regular, and the advanced.
+
+The regular version  of the software is  designed to be easier  to install. It
+can go in  any folder/URL in your web  host (i.e. it does *not* have  to be at
+the root). You  do have to configure  the .htaccess file so  that the software
+knows where it  is located so that  links are coded properly.  When using this
+version, when you want  to link to your home page, for  example you would link
+to "index.html", **NOT** "/index.html".
+
+This flexibility comes at a cost --- links *within* a page, e.g. "#footnote1",
+will not work with the regular version of MMD CMS. This is a limitation of the
+`<base href>` feature.
+
+If you want to allow internal links, then you need to use the advanced version
+of MMD  CMS. This version *does*  need to be installed  so that it lives  at a
+top-level URL.  This can be accomplished  by putting it at  the webserver root
+folder (wherever  that is for your  particular server), or by  using a virtual
+host. I  can't support everyone  in figuring  out how to  do that, but  I have
+included what I did to get it working on my particular machine.
+
+For Apache  2 on a Mac,  do the following (all  others will need to  seek help
+elsewhere):
+
+* as an admin, go to `/etc/apache2/extra`
+* `sudo pico httpd-vhosts.conf` (or similar)
+* comment out the existing virtualhost sections (add a "#" at the beginning of 
+  the line)
+* then, add something like the following at the end of the file:
+
+		<VirtualHost *:80>
+		    DocumentRoot "/Users/fletcher/Sites/mmd_static"
+		    ServerName mmd.local
+		</VirtualHost>
+
+* then add the following to `/etc/hosts`:
+
+		127.0.0.1       mmd.local
+
+* finally, `sudo pico /etc/apache2/httpd.conf` and uncomment the following
+  line:
+
+	Include /private/etc/apache2/extra/httpd-vhosts.conf
+
+If you  restart Web Sharing in  the control panel,  you should now be  able to
+access your  site by pointing  your browser to `http://mmd.local/`.  It should
+look much better than  the first time, but the default CSS  is ugly. There are
+two sample articles, and one sample tag, to get you started.
+
+You can then modify the `.htaccess` file just like the regular version.
+
 
 
 # How do I add content to my site? #
