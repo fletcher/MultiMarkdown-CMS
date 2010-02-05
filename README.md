@@ -101,6 +101,16 @@ becomes
 On a mac, for example, you would modify `/etc/apache2/users/username.conf`.
 
 
+The advanced version, however, requires that it be accessed at the root of the
+server, e.g. "http://example.com/" instead of "http://example.com/folder/".
+Depending on your web server, this may mean that you need to create a virtual
+host to point to your installation. Exactly how to do that is beyond the scope
+of this document. The main advantage of the advanced version is that you can
+use anchors that point within the page, e.g. `<a href="#footnote"/>`. These
+anchors break on the standard version. They are used by MultiMarkdown when
+creating footnotes, citations, and linking to sections within the document.
+
+
 # How do I add content to my site? #
 
 You can add  content anywhere within the MultiMarkdown CMS  directory. You can
