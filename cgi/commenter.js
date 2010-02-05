@@ -24,9 +24,9 @@ function writeCommenterGreeting(){
 	user = getCookie('User');
     
 	if (openId != '') {
-		content = '<p>You are signed in as <a href="' + openId + '">' + openId + '</a>.  You may <a href="javascript:forgetMe()">sign out</a>.</p><form action="cgi/submit_comment.cgi" method="PUT"><label>Name</label><input type="text" name="user" side="25" value="' + user + '"/><label>Comments (may contain MultiMarkdown syntax, but not HTML)</label><textarea name="text" rows="15" columns="40"></textarea><input type="submit" accesskey="s" name="post" value="Submit" /></form>';
+		content = '<p>You are signed in as <a href="' + openId + '">' + openId + '</a>.  You may <a href="javascript:forgetMe()">sign out</a>.</p><form action="/cgi/submit_comment.cgi" method="PUT"><label>Name</label><input type="text" name="user" side="25" value="' + user + '"/><label>Comments (may contain MultiMarkdown syntax, but not HTML)</label><textarea name="text" rows="15" columns="40"></textarea><input type="submit" accesskey="s" name="post" value="Submit" /></form>';
 	} else {
-	content = '<p>Please sign in using your <a href="http://en.wikipedia.org/wiki/Openid">OpenID</a>. If you don\'t have an OpenID, you may also email me.</p> <form action="cgi/openid_send.cgi" method="PUT" > <img src="images/openid.png" style="border:0px;	background-color:transparent;margin:0px;padding:0px;"/><label for="openid-field">OpenID URL</label><input id="openid-field" type="text" name="openid" size="25"/><input type="submit" value="Login"/></form> '; 
+	content = '<p>Please sign in using your <a href="http://en.wikipedia.org/wiki/Openid">OpenID</a>. If you don\'t have an OpenID, you may also email me.</p> <form action="cgi/openid_send.cgi" method="PUT" > <img src="/images/openid.png" style="border:0px;	background-color:transparent;margin:0px;padding:0px;"/><label for="openid-field">OpenID URL</label><input id="openid-field" type="text" name="openid" size="25"/><input type="submit" value="Login"/></form> '; 
 		}
 	
 	container.innerHTML = content;

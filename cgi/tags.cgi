@@ -85,7 +85,7 @@ $content
 		if ($data =~ /<meta name="Tags" content="(.*)"/mi) {
 			my @tags = split(/\s*,\s*/, $1);
 			my @links;
-			for (@links = @tags) {s/\s/_/g; s/(.*)/<a href="tags\/$1">$1<\/a>/; s/>(.*)_(.*)</>$1 $2</g;};
+			for (@links = @tags) {s/\s/_/g; s/(.*)/<a href="\/tags\/$1">$1<\/a>/; s/>(.*)_(.*)</>$1 $2</g;};
 			$output .= "tags: " . join(', ',@links);
 		}
 	}
@@ -110,7 +110,7 @@ sub find_pages {
 					$match = 0 if $tags !~ /(\A|,)\s*$_\s*(,|\Z)/i;
 				}
 				$filepath =~ s/(\A$site_root|(\/index)?\.html$)//g;
-				$filepath =~ s/^\///;
+				#$filepath =~ s/^\///;
 				$data =~ /<title>(.*?)<\/title>/;
 				$content .= "<li><a href=\"$filepath\">$1</a></li>\n" if $match;
 			}

@@ -65,7 +65,7 @@ if ($requested_url =~ /^\/?(\d\d\d\d).*\d\d/) {
 		print "<ul class=\"archives\">\n";
 		foreach my $date (sort { $b cmp $a} keys(%pages)) {
 			foreach my $title (sort keys %{$pages{$date}}) {
-				print "<li>$date: <a href=\"$pages{$date}{$title}\">$title</a></li>\n";""
+				print "<li>$date: <a href=\"/$pages{$date}{$title}\">$title</a></li>\n";""
 			}
 		}
 		print "</ul>\n";	
@@ -87,7 +87,7 @@ if ($requested_url =~ /^\/?(\d\d\d\d).*\d\d/) {
 
 	foreach (sort keys %months_with_entries) {
 		my $month = $months[$_-1];
-		$content .= "<li><a href=\"$year/$_/\">$month $year Archives</a></li>\n";
+		$content .= "<li><a href=\"/$year/$_/\">$month $year Archives</a></li>\n";
 	}
 
 
@@ -110,7 +110,7 @@ $content
 
 	foreach my $year (sort { $b cmp $a} keys(%pages)) {
 		foreach my $month (sort { $b cmp $a}keys %{$pages{$year}}) {
-			$content .= "<li><a href=\"$ENV{Base_URL}/$year/$month/\">$months[$month-1] $year</a></li>\n";
+			$content .= "<li><a href=\"/$year/$month/\">$months[$month-1] $year</a></li>\n";
 		}
 	}
 	if ($content ne "") {

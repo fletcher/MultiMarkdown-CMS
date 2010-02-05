@@ -3,4 +3,4 @@ Date:	02/03/2010 14:51:09
 Tags:	
 
 
-This page is a "child" of the top-level Category [page](category).
+This page is a "child" of the top-level Category [page](/category).

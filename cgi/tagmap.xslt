@@ -43,7 +43,7 @@
 	
 	<xsl:template match="tag">
 		<li>
-			<a href="tags/{@title}"><xsl:value-of select="@title"/></a>
+			<a href="/tags/{@title}"><xsl:value-of select="@title"/></a>
 			<xsl:if test="count(child::tag) &gt; 0">
 				<ul>
 					<xsl:apply-templates/>

@@ -58,7 +58,7 @@ foreach my $filepath (glob("$search_path*/index.html")) {
 	if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
 		my $title = $1;
 		$filepath =~ /$site_root\/(.*\/)index.html/;
-		$content .= "<li><a href=\"$1\">$title</a></li>\n";		
+		$content .= "<li><a href=\"/$1\">$title</a></li>\n";		
 	}
 }
 
