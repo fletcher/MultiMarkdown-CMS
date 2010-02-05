@@ -32,7 +32,7 @@ my $debug = 0;			# Enables extra output for debugging
 print "Content-type: text/html\n\n";
 
 # Don't match these pages
-if ($ENV{DOCUMENT_URI} =~ /^(\/index.html|\/?\d+\/\d+\/index|\/?archives|\/.*tagmap\.html)/) {
+if ($ENV{DOCUMENT_URI} =~ /(\/index.html|\/?\d+\/\d+\/index|\/?archives|\/.*tagmap\.html)/) {
 	exit;
 }
 
