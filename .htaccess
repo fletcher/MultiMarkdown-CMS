@@ -66,6 +66,7 @@ ErrorDocument 404 /notfound.html
 
 Options +Includes +FollowSymLinks +ExecCGI +Indexes
 XBitHack Full
+DirectorySlash On
 
 AddCharset UTF-8 .html
 
