@@ -90,40 +90,15 @@ And see *something* --- it will likely give you some error messages, however.
 
 # How to configure Apache #
 
-By default, MultiMarkdown CMS expects to be  at the "root" of your web server,
-not tucked away at `/~fletcher/mmd_static/`.
+Version 2 of MultiMarkdown CMS is much easier to install.  You are only required to modify your Apache configuration files so that:
 
-To fix this, we need to configure a virtual host in Apache, or your web server
-of choice.
+	AllowOverride none
 
-For Apache  2 on a Mac,  do the following (all  others will need to  seek help
-elsewhere):
+becomes
 
-* as an admin, go to `/etc/apache2/extra`
-* `sudo pico httpd-vhosts.conf` (or similar)
-* comment out the existing virtualhost sections (add a "#" at the beginning of 
-  the line)
-* then, add something like the following at the end of the file:
+	AllowOverride All
 
-		<VirtualHost *:80>
-			DocumentRoot "/Users/fletcher/Sites/mmd_static"
-			ServerName mmd.local
-		</VirtualHost>
-
-* then add the following to `/etc/hosts`:
-
-		127.0.0.1       mmd.local
-
-* finally, `sudo pico /etc/apache2/httpd.conf` and uncomment the following
-  line:
-
-		Include /private/etc/apache2/extra/httpd-vhosts.conf
-
-
-If you  restart Web Sharing in  the control panel,  you should now be  able to
-access your  site by pointing  your browser to `http://mmd.local/`.  It should
-look much better than the first time, but the default CSS is *ugly*. There are
-two sample articles, and one sample tag, to get you started.
+On a mac, for example, you would modify `/etc/apache2/users/username.conf`.
 
 
 # How do I add content to my site? #
