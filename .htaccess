@@ -36,6 +36,10 @@ RewriteCond %{HTTP_HOST} .*
 RewriteRule .* - [E=Base_URL:]
 
 
+# Force trailing slash for directories
+RewriteRule ^(.*[^/]+)(/index.html/?)$  /$1/   [R]
+
+
 # If your MMD-CMS site is not a "root-level" site, you need to use the 
 # following pattern to establish a top-level URL
 #
@@ -66,7 +70,6 @@ ErrorDocument 404 /notfound.html
 
 Options +Includes +FollowSymLinks +ExecCGI +Indexes
 XBitHack Full
-DirectorySlash On
 
 AddCharset UTF-8 .html
 
