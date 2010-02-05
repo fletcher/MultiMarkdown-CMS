@@ -53,9 +53,6 @@ RewriteRule .* - [E=Base_URL:]
 # RewriteCond %{HTTP_HOST} mymachine.local
 # RewriteRule .* - [E=Base_URL:/~user/mmd-cms] 
 
-RewriteCond %{HTTP_HOST} ivory.local
-RewriteRule .* - [E=Base_URL:/~fletcher/cms] 
-
 
 # Now, you can customize the URL to the notfound.html file, e.g.
 # ErrorDocument 404 /~user/mmd-cms/notfound.html
