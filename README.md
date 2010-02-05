@@ -142,7 +142,7 @@ elsewhere):
 * finally, `sudo pico /etc/apache2/httpd.conf` and uncomment the following
   line:
 
-	Include /private/etc/apache2/extra/httpd-vhosts.conf
+		Include /private/etc/apache2/extra/httpd-vhosts.conf
 
 If you  restart Web Sharing in  the control panel,  you should now be  able to
 access your  site by pointing  your browser to `http://mmd.local/`.  It should
