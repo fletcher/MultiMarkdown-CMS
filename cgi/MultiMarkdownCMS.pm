@@ -41,12 +41,14 @@ sub getHostingPaths {
 	$site_root =~ s/\/cgi$//;
 	
 	# Figure out the requested URI as a relative link
-	(my $request = $ENV{REQUEST_URI});
+	(my $request = "/" . $ENV{REQUEST_URI});
 		$request =~ s/$ENV{Base_URL}// if ($ENV{Base_URL} ne "");
-
+		$request =~ s/\/\//\//g;
+		
 	# Figure out the implicit filepath with extensions, etc
-	(my $document = $ENV{DOCUMENT_URI}); 
+	(my $document = "/" . $ENV{DOCUMENT_URI}); 
 		$document =~ s/$ENV{Base_URL}// if ($ENV{Base_URL} ne "");
+		$document =~ s/\/\//\//g;
 	
 	
 	return ($site_root, $request, $document);
