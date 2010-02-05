@@ -22,13 +22,42 @@ use strict;
 use warnings;
 
 use File::Find;
-use Cwd 'abs_path';
 use CGI;
+use MultiMarkdownCMS;
 
-my $root_folder = "$ENV{DOCUMENT_ROOT}/";
-my $root_url = "http://$ENV{HTTP_HOST}/";
+my $debug = 0;			# Enables extra output for debugging
+
 
 print "Content-type: text/html\n\n";
+
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
+# Determine local directory of "root" of web site and generate a 
+# "relative" URL request to that root
+#
+# $ENV{Base_URL} is set by apache's .htaccess configuration file on a 
+#	per host basis
+
+#(my $request = $ENV{REQUEST_URI}) =~ s/$ENV{Base_URL}//;
+#
+#(my $site_root = $ENV{SCRIPT_FILENAME} . $request ) =~ s/\/cgi\/.*?\//\//;
+#$site_root =~ s/\/?sitemap.xml//;
+#$site_root  =~ s/\/*$//;
+
+
+
+my $root_folder = $site_root;
+my $root_url = "http://$ENV{HTTP_HOST}$ENV{Base_URL}";
 
 
 # Print sitemap header
@@ -51,8 +80,7 @@ sub index_file {
 	
 	if ($filepath =~ s/^$root_folder(.*?)(index)?\.html$/$1/i) {
 		# Ignore certain files
-		return if ($filepath =~ /^(cgi\/|templates\/|google......|notfound|mt\/|mt-static)/);
-		return if ($filepath =~ /^test$/);
+		return if ($filepath =~ /^\/(cgi\/|templates\/|google......|notfound|mt\/|mt-static)/);
 		
 		my $priority = "0.8";
 	#	my @d = gmtime ((stat("$File::Find::name"))[9]);	# get file's modification time

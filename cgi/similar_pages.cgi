@@ -18,32 +18,46 @@
 #    59 Temple Place, Suite 330
 #    Boston, MA 02111-1307 USA
 
-use File::Basename;
-use File::Path;
-use Cwd 'abs_path';
+use MultiMarkdownCMS;
 
-print "Content-type: text/html\n\n";
 
-# Don't match these pages
-if ($ENV{DOCUMENT_URI} =~ /^(\/index.html|\/?\d+\/\d+\/index|\/?archives)/) {
-	exit;
-}
 
 # Configuration
 
 $threshold = 0.25;		# Minimum relatedness score (0...1)
 $max_matches = 5;		# Maximum related pages to show
-$debug = 0;				# Show scores
+my $debug = 0;			# Enables extra output for debugging
 
-# Read index file
+
+print "Content-type: text/html\n\n";
+
+# Don't match these pages
+if ($ENV{DOCUMENT_URI} =~ /^(\/index.html|\/?\d+\/\d+\/index|\/?archives|\/.*tagmap\.html)/) {
+	exit;
+}
+
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
 
 local $/;
-open(INDEX, "< $ENV{DOCUMENT_ROOT}/cgi/vector_index");
+
+
+open(INDEX, "< $site_root/cgi/vector_index");
 my $index = <INDEX>;
 close(INDEX);
 
 my %matches = ();
-my $query = "$ENV{DOCUMENT_URI}";
+my $query = "$document_url";
 
 my $content = "";
 
@@ -65,7 +79,7 @@ while ($index =~ /^(.*$query.*)$/mig) {
 my $count = 0;
 foreach my $match (sort {$matches{$b} <=> $matches{$a}} keys %matches) {
 	if ($count < $max_matches) {
-		open (FILE, "<$ENV{DOCUMENT_ROOT}$match");
+		open (FILE, "<$site_root$match");
 		my $data = <FILE>;
 		close(FILE);
 		my $title = $match;
@@ -74,6 +88,8 @@ foreach my $match (sort {$matches{$b} <=> $matches{$a}} keys %matches) {
 		}
 		my $score = "";
 		$score = $matches{$match} if ($debug);
+		$match =~ s/^\///;
+		$match =~ s/(index)?\.html//;
 		$content .= "<li><a href=\"$match\">$title</a></li>$score\n";
 	}
 	$count++;

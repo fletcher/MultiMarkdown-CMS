@@ -19,35 +19,55 @@
 #    Boston, MA 02111-1307 USA
 
 
-use File::Basename;
-use File::Path;
-use Cwd 'abs_path';
 use CGI;
 use File::Find;
+use MultiMarkdownCMS;
+
+
+my $debug = 0;			# Enables extra output for debugging
+
 
 my $cgi = CGI::new();
 
 my $content = "";
 
-# Web root folder
-my $search_path = "";
 
-if ($ENV{DOCUMENT_ROOT}) {
-	$search_path = $ENV{DOCUMENT_ROOT};
-} else {
-	my $me = $0;		# Where is this script located?
-	$me = dirname($me);
-	$me = abs_path($me);
-	($search_path = $me) =~ s/\/cgi$//;
-}
+#(my $request = $ENV{REQUEST_URI}) =~ s/$ENV{Base_URL}//;
+
+#(my $site_root = $ENV{SCRIPT_FILENAME} . $request ) =~ s/\/cgi\/.*?\//\//;
+#$site_root =~ s/\/?tags//;
+#$site_root  =~ s/\/*$//;
+
+#my $search_path;
+##if ($ENV{Base_URL}) {
+#	# We're called from Apache#
+#	$search_path = $site_root;
+#} else {#
+#	# We're called from the command line
+#	my $me = $0;
+#	$me = dirname($me);
+##	($search_path = $me) =~ s/\/cgi$//;
+#}
 
 
 print "Content-type: text/html\n\n";
 
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
+
 my $content = "<taglist>\n";
 
 # Index all documents
-find(\&find_pages, $search_path);
+find(\&find_pages, $site_root);
 $content .= "</taglist>\n";
 
 

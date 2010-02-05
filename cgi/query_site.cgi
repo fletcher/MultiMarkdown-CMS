@@ -22,9 +22,10 @@ use strict;
 use warnings;
 use VectorMap;
 use File::Find;
-use File::Basename;
-use Cwd 'abs_path';
+use MultiMarkdownCMS;
 use CGI;
+
+my $debug = 0;			# Enables extra output for debugging
 
 my $map = VectorMap->new();
 my $cgi = CGI::new();
@@ -34,21 +35,21 @@ my $query = $cgi->param("query") || "test query multimarkdown";
 print $cgi->header();
 my $content = "";
 
-# Web root folder
-my $search_path = "";
 
-if ($ENV{DOCUMENT_ROOT}) {
-	$search_path = $ENV{DOCUMENT_ROOT};
-} else {
-	my $me = $0;		# Where is this script located?
-	$me = dirname($me);
-	$me = abs_path($me);
-	($search_path = $me) =~ s/\/cgi$//;
-}
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
 
 
 # Index all documents
-find(\&find_pages, $search_path);
+find(\&find_pages, $site_root);
 
 # Iterate through objects and calculate similarites
 $map->add_object('query',$query);
@@ -65,8 +66,8 @@ foreach my $a (sort { $matrix{$b} <=> $matrix{$a}} keys %matrix) {
 		$data =~ /Title:\s*(.*?)\n/;
 		$title = $1;
 	}	
-	(my $a1 = $a) =~ s/(\A$search_path|(\/index)?\.txt$)//g;
-	$content .= "<li><a href=\"$a1\">$title</a>: $matrix{$a}</li>\n";
+	(my $a1 = $a) =~ s/(\A$site_root|(\/index)?\.txt$)//g;
+	$content .= "<li><a href=\"$ENV{Base_URL}$a1\">$title</a>: $matrix{$a}</li>\n";
 }
 
 print "<h2>Matches for \"$query\"</h2>";

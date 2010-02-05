@@ -63,7 +63,7 @@ if ($claimed_id) {
 
 	my $check_url = $claimed_id->check_url (
 		# The place we go back to.
-		return_to  => "http://$ENV{HTTP_HOST}/cgi/openid_response.cgi?referer=$prior_page;",
+		return_to  => "http://$ENV{HTTP_HOST}$ENV{Base_URL}/cgi/openid_response.cgi?referer=$prior_page;",
 		# Having this simplifies the login process.
 		trust_root => "http://$ENV{HTTP_HOST}/",
 		delayed_return  => 1,

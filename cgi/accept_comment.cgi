@@ -25,11 +25,26 @@ use Net::OpenID::Consumer;
 use LWP::UserAgent;
 use CGI;
 use POSIX;
+use MultiMarkdownCMS;
 
 my $cgi = CGI::new();
 my $comment = $cgi->cookie("Comment");
 my $user = $cgi->cookie("User");
-my $timezone = -4;
+my $timezone = -4;						# Configure as needed
+my $debug = 0;							# Enables extra output for debugging
+
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
 
 my $csr = Net::OpenID::Consumer->new (
 	# The root of our URL.
@@ -63,10 +78,12 @@ $csr->handle_server_response (
 
 		# Successful authentication - accept the comment and addend
 		
-		my $local_root = $ENV{DOCUMENT_ROOT};
-		my $URI = $refer;
+		my $local_root = $site_root;
+		my $URI = "/" . $refer;
 		$URI =~ s/(\.html)?$/.html/;
-
+		$URI =~ s/$ENV{Base_URL}// if ($ENV{Base_URL} ne "");
+		$URI =~ s/^\/?//;
+		
 		# This doesn't work, but worth a shot to trigger a refresh?
 		system("touch $local_root/$URI");
 		

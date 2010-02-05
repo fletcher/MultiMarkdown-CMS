@@ -21,7 +21,10 @@
 use warnings;
 
 use File::Find;
-use Cwd 'abs_path';
+use MultiMarkdownCMS;
+
+
+my $debug = 0;			# Enables extra output for debugging
 
 local $/;
 
@@ -29,12 +32,22 @@ my $max_count = 15;
 
 print "Content-type: text/html\n\n";
 
-# Web root folder
-my $search_path = $ENV{DOCUMENT_ROOT};
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
 
 my %pages = ();
 
-find(\&index_file, $search_path);
+find(\&index_file, $site_root);
 
 my $count = 0;
 my $output = "";
@@ -45,9 +58,9 @@ foreach my $year (sort {$b cmp $a} keys %pages) {
 			foreach my $filepath (sort {$b cmp $a}keys %{$pages{$year}{$month}{$day}}) {
 				if ($count < $max_count) {
 					my $title = $pages{$year}{$month}{$day}{$filepath};
-					$filepath =~ s/^$search_path//;
+					$filepath =~ s/^$site_root//;
 					$filepath =~ s/\.html$//;
-					$output .= qq{<li>$year.$month.$day: <a href="$filepath">$title</a></li>\n};
+					$output .= qq{<li>$year.$month.$day: <a href="$ENV{Base_URL}$filepath">$title</a></li>\n};
 					$count++;
 				}
 			}
@@ -68,7 +81,7 @@ sub index_file {
 
 	return if ($filepath =~ /index.html$/);
 
-	if ($filepath =~ /$search_path\/(\d\d\d\d)\/(\d\d)\/.*\.html$/) {
+	if ($filepath =~ /$site_root\/(\d\d\d\d)\/(\d\d)\/.*\.html$/) {
 		my $year = $1;
 		my $month = $2;
 		my $day = "";

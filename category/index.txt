@@ -1,0 +1,7 @@
+Title:	Test Category  
+Date:	02/03/2010 14:51:09 
+Tags:	
+
+
+This pages represents a "category". There should be an entry below for a page
+in a subfolder.

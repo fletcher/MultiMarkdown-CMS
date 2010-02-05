@@ -18,38 +18,35 @@
 #    59 Temple Place, Suite 330
 #    Boston, MA 02111-1307 USA
 
-use File::Basename;
-use File::Path;
-use Cwd 'abs_path';
 use CGI;
 use File::Find;
+use MultiMarkdownCMS;
 
-# TODO: If no tag given, should give list of available tags as links
 
 my $cgi = CGI::new();
+my $debug = 0;			# Enables extra output for debugging
 
 my @tag_query = ();
 my $content = "";
 
-# Web root folder
-my $search_path = "";
-
-if ($ENV{DOCUMENT_ROOT}) {
-	$search_path = $ENV{DOCUMENT_ROOT};
-} else {
-	my $me = $0;		# Where is this script located?
-	$me = dirname($me);
-	$me = abs_path($me);
-	($search_path = $me) =~ s/\/cgi$//;
-}
-
 print "Content-type: text/html\n\n";
 
-if ($ENV{DOCUMENT_URI} eq "/tags/index.html") {
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
+
+if ($document_url eq "/templates/tags.html") {
 	# We are looking for pages that match given tag(s)
 	
 	# Convert path into list of tags to match
-#	my $path = $cgi->path_info;
 	my $path = $cgi->param('query');
 	
 	# Clean up tag names
@@ -59,7 +56,7 @@ if ($ENV{DOCUMENT_URI} eq "/tags/index.html") {
 	@tag_query = split('\s*/\s*',$path);	
 
 	# Index all documents
-	find(\&find_pages, $search_path);
+	find(\&find_pages, $site_root);
 
 	$query = join(', ',@tag_query);
 	print qq{<div class="content"><h2>Pages tagged $query</h2>
@@ -77,7 +74,7 @@ $content
 	# We are processing tags on a given page
 
 	# Where am I called from
-	my $file_path = $ENV{DOCUMENT_ROOT} . $ENV{DOCUMENT_URI};
+	my $file_path = $site_root . $document_url;
 
 	local $/;
 	my $output = "";
@@ -88,7 +85,7 @@ $content
 		if ($data =~ /<meta name="Tags" content="(.*)"/mi) {
 			my @tags = split(/\s*,\s*/, $1);
 			my @links;
-			for (@links = @tags) {s/\s/_/g; s/(.*)/<a href="\/tags\/$1">$1<\/a>/; s/>(.*)_(.*)</>$1 $2</g;};
+			for (@links = @tags) {s/\s/_/g; s/(.*)/<a href="tags\/$1">$1<\/a>/; s/>(.*)_(.*)</>$1 $2</g;};
 			$output .= "tags: " . join(', ',@links);
 		}
 	}
@@ -112,7 +109,8 @@ sub find_pages {
 				foreach (@tag_query) {
 					$match = 0 if $tags !~ /(\A|,)\s*$_\s*(,|\Z)/i;
 				}
-				$filepath =~ s/(\A$search_path|(\/index)?\.html$)//g;
+				$filepath =~ s/(\A$site_root|(\/index)?\.html$)//g;
+				$filepath =~ s/^\///;
 				$data =~ /<title>(.*?)<\/title>/;
 				$content .= "<li><a href=\"$filepath\">$1</a></li>\n" if $match;
 			}

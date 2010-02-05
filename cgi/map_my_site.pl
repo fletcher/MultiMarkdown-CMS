@@ -22,20 +22,25 @@ use strict;
 use warnings;
 use VectorMap;
 use File::Find;
-use File::Basename;
-use Cwd 'abs_path';
+use MultiMarkdownCMS;
+
+my $debug = 0;			# Enables extra output for debugging
 
 my $map = VectorMap->new();
 
-# Determine web root folder
-my $me = $0;		# Where is this script located?
-$me = dirname($me);
-$me = abs_path($me);
-(my $search_path = $me) =~ s/\/cgi$//;
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
 
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
 
 # Index all documents
-find(\&find_pages, $search_path);
+find(\&find_pages, $site_root);
 
 # Iterate through objects and calculate similarites
 my %matrix = $map->map_relationships();
@@ -44,7 +49,7 @@ my %matrix = $map->map_relationships();
 foreach my $a (sort keys %matrix) {
 	foreach my $b (sort keys %{$matrix{$a}}) {
 		my ($a1,$b1);
-		for (($a1,$b1) = ($a,$b)) {s/(\A$search_path|\.txt$)//g; $_.=".html"};
+		for (($a1,$b1) = ($a,$b)) {s/(\A$site_root|\.txt$)//g; $_.=".html"};
 		print "$a1\t$b1\t" . $matrix{$a}{$b} . "\n";
 	}
 }

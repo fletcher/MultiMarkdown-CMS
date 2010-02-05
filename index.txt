@@ -6,4 +6,4 @@ System...
 
 Learn more at <http://fletcherpenney.net/multimarkdown/cms/>.
 
-<!--#include virtual="/cgi/latest_stories.cgi" -->
+<!--#include virtual="cgi/latest_stories.cgi" -->

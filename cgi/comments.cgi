@@ -21,13 +21,14 @@
 use strict;
 use warnings;
 
-use File::Basename;
-use File::Path;
-use Cwd 'abs_path';
 use IO::String;
 use CGI;
+use MultiMarkdownCMS;
+
 
 my $cgi = CGI::new();
+my $debug = 0;			# Enables extra output for debugging
+
 
 print "Content-type: text/html\n\n";
 
@@ -35,7 +36,21 @@ print "<div class = \"comments\">
 <h2>Comments</h2>
 ";
 
-(my $filepath = $ENV{DOCUMENT_ROOT} . $ENV{DOCUMENT_URI}) =~ s/(\.html)?$/.comments/;
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
+
+(my $filepath = $site_root . $document_url) =~ s/(\.html)?$/.comments/;
+
 
 my @months = qw(January February March April May June July August
 	September October November December);

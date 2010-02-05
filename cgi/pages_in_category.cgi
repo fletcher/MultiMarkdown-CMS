@@ -18,38 +18,46 @@
 #    59 Temple Place, Suite 330
 #    Boston, MA 02111-1307 USA
 
-use File::Basename;
-use File::Path;
-use Cwd 'abs_path';
+use MultiMarkdownCMS;
+my $debug = 0;			# Enables extra output for debugging
+
 
 print "Content-type: text/html\n\n";
 
-if ($ENV{DOCUMENT_URI} eq "/index.html") {
+
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
+
+# Debugging aid
+print qq{
+	Site root directory: $site_root<br/>
+	Request:  $requested_url<br/>
+	Document: $document_url<br/>
+} if $debug;
+
+
+# Don't do this on the home page
+if ($requested_url eq "/") {
 	exit;
 }
 
-(my $uri = $ENV{REQUEST_URI}) =~ s/\/*(index.html)?$/\//;
 
-# Where am I called from
-my $search_path = $ENV{DOCUMENT_ROOT} . $ENV{DOCUMENT_URI};
+# We want to search only in the current directory
 
-# Get just the directory
-$search_path = dirname($search_path);
-#print "Search $search_path\n<br/><br/>";
-
-# Look for other directories that exist
+$search_path = $site_root . $requested_url;
 
 
 local $/;
 
 my $content = "";
 
-foreach my $filepath (glob("$search_path/*/index.html")) {
+foreach my $filepath (glob("$search_path*/index.html")) {
 	open (FILE, "<$filepath");
 	my $data = <FILE>;
 	if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
 		my $title = $1;
-		$filepath =~ /$search_path\/(.*\/)index.html/;
+		$filepath =~ /$site_root\/(.*\/)index.html/;
 		$content .= "<li><a href=\"$uri$1\">$title</a></li>\n";		
 	}
 }
@@ -60,7 +68,3 @@ $content
 </ul>
 };
 }
-
-#foreach $key (sort keys(%ENV)) {
-#	print "$key = $ENV{$key}<BR>\n";
-#}

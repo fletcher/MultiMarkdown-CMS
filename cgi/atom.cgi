@@ -22,21 +22,20 @@ use warnings;
 
 use XML::Atom::SimpleFeed;
 use File::Find;
-use File::Basename;
-use Cwd 'abs_path';
 use CGI;
+use MultiMarkdownCMS;
 
 my $host;
 if ($ENV{HTTP_HOST}) {
 	$host = $ENV{HTTP_HOST};
 } else {
-	$host = "fake.local";
+	$host = "127.0.0.1";
 }
 
 my $feed = XML::Atom::SimpleFeed->new(
 	title	=> "$host",
-	link	=> "http://$host/",
-	link    => { rel => 'self', href => "http://$host/atom.xml", },
+	link	=> "http://$host$ENV{Base_URL}/",
+	link    => { rel => 'self', href => "http://$host$ENV{Base_URL}/atom.xml", },
 	author	=> 'MultiMarkdown CMS',
 );
 
@@ -46,21 +45,13 @@ my $max_count = 25;
 
 print "Content-type: text/html\n\n";
 
-# Web root folder
-my $search_path = "";
-
-if ($ENV{DOCUMENT_ROOT}) {
-	$search_path = $ENV{DOCUMENT_ROOT};
-} else {
-	my $me = $0;		# Where is this script located?
-	$me = dirname($me);
-	$me = abs_path($me);
-	($search_path = $me) =~ s/\/cgi$//;
-}
+# Get commonly needed paths
+my ($site_root, $requested_url, $document_url) 
+	= MultiMarkdownCMS::getHostingPaths($0);
 
 my %pages = ();
 
-find(\&index_file, $search_path);
+find(\&index_file, $site_root);
 
 my $count = 0;
 
@@ -70,11 +61,10 @@ foreach my $date (sort {$b cmp $a} keys %pages) {
 		if ($count < $max_count) {
 			my $title = $pages{$date}{$filepath};
 			my $content = $pages{$date}{$filepath}{body};
-			$filepath =~ s/^$search_path//;
-
+			$filepath =~ s/^$site_root//;
 			$feed->add_entry(
 				title	=> $title,
-				link	=> "http://$host$filepath",
+				link	=> "http://$host$ENV{Base_URL}$filepath",
 				updated => $date,
 				content	=> $content,
 			);
@@ -91,7 +81,7 @@ sub index_file {
 
 	return if ($filepath =~ /index.html$/);
 
-	if ($filepath =~ /$search_path\/(\d\d\d\d)\/(\d\d)\/.*\.html$/) {
+	if ($filepath =~ /$site_root\/(\d\d\d\d)\/(\d\d)\/.*\.html$/) {
 		my $date = "";
 		
 		open (FILE, "<$filepath");
