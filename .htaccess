@@ -37,7 +37,8 @@ RewriteRule .* - [E=Base_URL:]
 
 
 # Force trailing slash for directories
-RewriteRule ^(.*[^/]+)(/index.html/?)$  /$1/   [R]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/]+)$  /$1/   [R]
 
 
 # If your MMD-CMS site is not a "root-level" site, you need to use the 
