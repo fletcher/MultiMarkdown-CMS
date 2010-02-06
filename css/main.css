@@ -17,13 +17,9 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/* Default Settings */
+@import url(/css/layout.css);		// Import layout code
 
-body {
-	padding:2% 5%;
-	margin:0;
-	text-align: center;
-}
+/* Default Settings */
 
 div {
 	text-align: left;	
@@ -37,25 +33,6 @@ div.header {
 	max-width:60em;
 	min-width:640px;
 	margin:auto;
-}
-
-div.wrapper {
-	font-size:1em;
-	max-width:54em;
-	min-width:740px;
-	margin: auto;
-}
-
-div.content {
-	margin-right: 10em; 
-	max-width:35em;
-}
-
-div.sidebar {
-	font-size:1em;
-	float: right;
-	width: 14em;
-	padding:5px;
 }
 
 div.footer {
