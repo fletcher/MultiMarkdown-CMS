@@ -1,0 +1,70 @@
+/*	CSS System
+
+	Modified by Fletcher T. Penney from the original:
+
+	http://matthewjamestaylor.com/blog/ultimate-multi-column-liquid-layouts-em-and-pixel-widths
+	
+	by Matthew James Taylor
+	
+*/
+
+body {
+	margin:0;
+	padding:0;
+	border:0;
+	/* This removes the border around the viewport in old versions of IE */
+
+	/* Minimum width of layout - remove line if not required */
+	/* The min-width property does not work in old versions of Internet Explorer */
+
+	min-width:740px;
+	text-align: center;
+}
+
+
+/* wraps content and sidebar */
+.wrapper {
+	position:relative;		/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	clear:both;
+	width:100%;			/* width of whole page */
+	overflow:hidden;	/* This chops off any overhanging divs */
+//	float:left;
+
+	max-width:54em;
+	margin:0 auto;
+	font-size:1em;
+}
+
+
+/* 2 column right menu settings */
+.rightmenu .innerwrapper {
+	float:left;
+	width:200%;
+	margin-left:-16em;
+	position:relative;
+	right:100%;
+}
+.rightmenu .contentwrapper {
+	float:left;
+	width:50%;
+	position:relative;
+	left:50%;
+	padding-bottom:1em;
+}
+.rightmenu .content {
+    margin:0 1em 0 17em;
+    overflow:hidden;
+	max-width:35em;
+}
+.rightmenu .sidebar {
+	float:right;
+	width:14em;
+	position:relative;
+	left:15em;
+}
+/* Footer styles */
+#footer {
+    clear:both;
+    float:left;
+    width:100%;
+}
