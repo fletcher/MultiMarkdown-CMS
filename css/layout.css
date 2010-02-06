@@ -44,6 +44,12 @@ body {
 	position:relative;
 	right:100%;
 }
+.leftmenu .innerwrapper {
+	float:left;
+	width:200%;
+	position:relative;
+	left:12em;
+}
 .rightmenu .contentwrapper {
 	float:left;
 	width:50%;
@@ -51,16 +57,35 @@ body {
 	left:50%;
 	padding-bottom:1em;
 }
+.leftmenu .contentwrapper {
+	float:right;
+	width:50%;
+	position:relative;
+	right:12em;
+	padding-bottom:1em;
+}
 .rightmenu .content {
     margin:0 1em 0 17em;
     overflow:hidden;
 	max-width:35em;
+}
+.leftmenu .content {
+	margin:0 1em 0 17em;
+	position:relative;
+	right:100%;
+	overflow:hidden;
 }
 .rightmenu .sidebar {
 	float:right;
 	width:14em;
 	position:relative;
 	left:15em;
+}
+.leftmenu .sidebar {
+	float:left;
+	width:14em;
+	position:relative;
+	right:12em;
 }
 /* Footer styles */
 #footer {
