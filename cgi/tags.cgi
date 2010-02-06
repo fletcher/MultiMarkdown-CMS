@@ -59,7 +59,7 @@ if ($document_url eq "/templates/tags.html") {
 	find(\&find_pages, $site_root);
 
 	$query = join(', ',@tag_query);
-	print qq{<div class="content"><h2>Pages tagged $query</h2>
+	print qq{<h2>Pages tagged $query</h2>
 };
 	
 	if ($content) {print qq{
@@ -69,7 +69,6 @@ $content
 };
 	};
 	
-	print "</div>";
 } else {
 	# We are processing tags on a given page
 
