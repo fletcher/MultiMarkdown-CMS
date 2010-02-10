@@ -28,7 +28,7 @@ body {
 	clear:both;
 	width:100%;			/* width of whole page */
 	overflow:hidden;	/* This chops off any overhanging divs */
-//	float:left;
+/*	float:left; */
 
 	max-width:54em;
 	margin:0 auto;
