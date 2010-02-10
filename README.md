@@ -181,13 +181,13 @@ look pretty....
 Included with  MultiMarkdown-CMS are several  cgi scripts that  add additional
 features:
 
-* pages in the `/YYYY/MM/` hierarchy are treated as "blog posts" - organized
-  by date
+* pages in the `/YYYY/MM/` hierarchy are treated as "blog posts"- organized by
+  date
 
-* an archive of blog posts is available at `/archives/`, you can also go to
+* an archive  of blog posts is  available at `/archives/`, you can  also go to
   any year or year/month and see a list of posts in that month
 
-* visitors can leave comments on any blog post (by default comments are not
+* visitors can  leave comments on any  blog post (by default  comments are not
   accepted on other pages)
 
 * visitors are authenticated via OpenID for leaving comments
@@ -195,23 +195,42 @@ features:
 * two Atom feeds are generated automatically - one for blog posts, and one for
   comments
 
-* `/sitemap.xml` generates a Google compatible sitemap of the content of your
+* `/sitemap.xml` generates a Google compatible  sitemap of the content of your
   site
 
 * by default, the home page lists the last 15 blog posts
 
-* by default, `index.html` pages show a list of the other pages within that
+* by default, `index.html` pages include a list of the other pages within that
   folder
 
-* a built-in search function is available (though setting up a [Custom Search Engine](http://www.google.com/cse/) isn't a bad idea either)
+* a built-in search function is available (though setting up a 
+  [Custom Search Engine](http://www.google.com/cse/) isn't a bad idea either)
 
 * a list of similar pages can be added to each page in the site
 
-* several tag related features are available automatically
+* several  tag related  features are  available automatically  --- `/tags/foo`
+  searches for posts tagged `foo` and `/tagmap/` shows a list  of current tags
+  with links to those pages
+
+* default CSS allows you to switch from a right-sided sidebar, to a left-sided
+  sidebar with a  simple keyword  switch in `header.html`  --- `rightmenu`  vs
+  `leftmenu` (thanks to [Matthew James Taylor][MJT])
+
+* valid XHTML 1.1 valid CSS
 
 These features are  all demonstrated by the default configuration  - feel free
 to modify the scripts as needed for your own requirements.
 
+[MJT]: http://matthewjamestaylor.com/blog/ultimate-multi-column-liquid-layouts-em-and-pixel-widths
+
+
+# Metadata #
+
+The primary metadata used to for this software consists of three tags:
+
+* Title --- Self-explanatory
+* Date --- either `01/31/2010 15:59:56`, or `01/31/2010`
+* Tags --- comma separated list of tags (case sensitive)
 
 # Settings #
 
