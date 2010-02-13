@@ -21,28 +21,6 @@
 
 /* Default Settings */
 
-div {
-	text-align: left;
-}
-
-div.header {
-	background-position: -10px 0px;
-	position: relative;
-	padding: 10px 10px 0px 10px;
-	margin-bottom: 2.25em;
-	max-width:60em;
-	min-width:640px;
-	margin:auto;
-}
-
-div.footer {
-	max-width:60em;
-	min-width:640px;
-	font-size:0.75em;
-	clear:both;
-	margin:auto;
-}
-
 textarea[name="text"] {
 	width:110%;
 }

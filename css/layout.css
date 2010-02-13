@@ -1,95 +1,75 @@
-/*	CSS System
-
-	Modified by Fletcher T. Penney from the original:
-
-	http://matthewjamestaylor.com/blog/ultimate-multi-column-liquid-layouts-em-and-pixel-widths
-	
-	by Matthew James Taylor
-	
-*/
-
 body {
-	margin:0;
-	padding:0;
-	border:0;
-	/* This removes the border around the viewport in old versions of IE */
-
-	/* Minimum width of layout - remove line if not required */
-	/* The min-width property does not work in old versions of Internet Explorer */
-
-	min-width:740px;
-	text-align: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 60em;
+  text-align: center;
 }
-
-
-/* wraps content and sidebar */
+div { text-align: left; }
+.header {
+  background-position: -10px 0px;
+  position: relative;
+  padding: 10px 10px 0px 10px;
+  max-width: 60em;
+  margin: 1.75em auto 0em auto;
+}
 .wrapper {
-	position:relative;		/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
-	clear:both;
-	width:100%;			/* width of whole page */
-	overflow:hidden;	/* This chops off any overhanging divs */
-/*	float:left; */
-
-	max-width:54em;
-	margin:0 auto;
-	font-size:1em;
+  position: relative;
+  width: 100%;
+  min-width: 59em;
+  clear: both;
+  overflow: hidden;
+  max-width: 59em;
+  margin: 0 auto;
+  margin-bottom: 1.75em;
 }
-
-
-/* 2 column right menu settings */
+.innerwrapper {
+  float: left;
+  width: 200%;
+  position: relative;
+}
+.contentwrapper {
+  position: relative;
+  padding-bottom: 1em;
+}
+.content {
+  max-width: 35em;
+  overflow: hidden;
+  margin: 0 2.5em 0 16.5em;
+}
+.sidebar {
+  width: 14em;
+  position: relative;
+}
+.footer {
+  clear: both;
+  float: left;
+  width: 100%;
+  min-width: 59em;
+  font-size: 0.75em;
+}
 .rightmenu .innerwrapper {
-	float:left;
-	width:200%;
-	margin-left:-16em;
-	position:relative;
-	right:100%;
-}
-.leftmenu .innerwrapper {
-	float:left;
-	width:200%;
-	position:relative;
-	left:12em;
+  margin-left: -14em;
+  right: 100%;
 }
 .rightmenu .contentwrapper {
-	float:left;
-	width:50%;
-	position:relative;
-	left:50%;
-	padding-bottom:1em;
-}
-.leftmenu .contentwrapper {
-	float:right;
-	width:50%;
-	position:relative;
-	right:12em;
-	padding-bottom:1em;
-}
-.rightmenu .content {
-    margin:0 1em 0 17em;
-    overflow:hidden;
-	max-width:35em;
-}
-.leftmenu .content {
-	margin:0 1em 0 17em;
-	position:relative;
-	right:100%;
-	overflow:hidden;
+  float: left;
+  left: 50%;
 }
 .rightmenu .sidebar {
-	float:right;
-	width:14em;
-	position:relative;
-	left:15em;
+  float: right;
+  left: 11.5em;
+}
+.leftmenu .innerwrapper { left: 19em; }
+.leftmenu .contentwrapper {
+  float: right;
+  right: 24em;
+}
+.leftmenu .content {
+  position: relative;
+  right: 100%;
 }
 .leftmenu .sidebar {
-	float:left;
-	width:14em;
-	position:relative;
-	right:12em;
-}
-/* Footer styles */
-#footer {
-    clear:both;
-    float:left;
-    width:100%;
+  float: left;
+  right: 16.5em;
 }
