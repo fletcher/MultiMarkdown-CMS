@@ -1,0 +1,172 @@
+/*	CSS System
+
+	Portions modified from from:
+	http://matthewjamestaylor.com/blog/ultimate-multi-column-liquid-layouts-em-and-pixel-widths
+
+	by Matthew James Taylor
+
+
+	Remainder Copyright (c) 2010 Fletcher T. Penney
+		<http://fletcherpenney.net/>
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+// layout.less - define the overall page layout, sidebar positioning, etc.
+
+
+/* NOTE: This file is created with [LESS](http://lesscss.org/). To convert it
+to CSS, you must process it with the lessc tool.
+
+Alternatively, you can look at the measurements section and calculate the
+changes you wish to make, and modify `layout.css` by hand.
+
+Option 1 may be easier if you plan on making changes frequently.
+
+*/
+
+
+// Measurements
+
+@content_width:		35em;		// Width for the main content section
+@sidebar_width:		14em;		// Width for sidebar content
+@content_margin:	2.5em;		// Left-Right margin around content
+@sidebar_margin:	2.5em;		// Left-Right margin around sidebar
+@header_width:		60em;		// Width for header
+@page_margin:		1.75em;		// Margin at top and bottom of page
+@bottom_padding:	1em;		// Padding at bottom of content
+@minimum_width:		60em;		// Minimum width for the body	
+
+@footer_font_size:	0.75em;		// Relative font size for footer
+
+@total_width:		@content_width + @sidebar_width + @sidebar_margin + @sidebar_margin + @content_margin + @content_margin;
+
+@sidebar_and_margins:	@sidebar_width + @content_margin;
+
+
+// CSS
+body {
+	margin:		0;
+	padding:	0;
+	border:		0;
+	/* This removes the border around the viewport in old versions of IE */
+
+	/* Minimum width of layout - remove line if not required */
+	/* The min-width property does not work in old versions of Internet Explorer */
+	min-width:	@minimum_width;
+	text-align:	center;		// To keep content in middle of page
+}
+
+
+div {
+//	border:thin 			solid;		// Border can be useful for debugging
+	text-align:				left;
+}
+
+
+// Put some spacing around the header - feel free to change
+
+.header {
+	background-position:	-10px 0px;
+	position:				relative;
+	padding:				10px 10px 0px 10px;
+	max-width:				@header_width;
+	margin:					@page_margin auto 0em auto;
+}
+
+
+
+
+//	Settings for a two-column layout
+//	main content + a sidebar to the left *or* right
+//	In general, you should not need to adjust the sections below
+
+// Settings for both "handedness" types
+
+.wrapper {
+	position:	relative;
+/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	width:			100%;			/* width of whole page */
+	min-width:		@total_width;
+	clear:			both;
+	overflow:		hidden;			/* This chops off any overhanging divs */
+	max-width:		@content_width + @sidebar_width + @sidebar_margin + @content_margin + @sidebar_margin + @content_margin;
+	margin:			0 auto;
+	margin-bottom:	@page_margin;
+}
+.innerwrapper {
+	float:			left;
+	width:			200%;
+	position:		relative;
+}
+.contentwrapper {
+	position:		relative;
+	padding-bottom:	@bottom_padding;
+}
+.content {
+	max-width:		@content_width;
+	overflow:		hidden;
+	margin:			0 @content_margin 0 @sidebar_and_margins;
+}
+.sidebar {
+	width:			@sidebar_width;
+	position:		relative;
+}
+.footer {
+	clear:			both;
+	float:			left;
+	width:			100%;
+	min-width:		@total_width;
+	font-size:		@footer_font_size;
+}
+
+
+// Settings for a right-sided menu
+
+.rightmenu {
+	.innerwrapper {
+		margin-left:	0 - @sidebar_width;
+		right:			100%;
+	}
+	.contentwrapper {
+		float:		left;
+		left:		50%;
+	}
+	.sidebar {
+		float:		right;
+		left:		@sidebar_width - @sidebar_margin;
+	}
+}
+
+
+// Settings for a left-sided menu
+
+.leftmenu {
+	.innerwrapper {
+		left:		@sidebar_width + @sidebar_margin + @sidebar_margin;
+	}
+	.contentwrapper {
+		float:		right;
+		right:		@sidebar_width + @sidebar_margin +  @sidebar_margin + @sidebar_margin +  @sidebar_margin;
+	}
+	.content {
+		position:	relative;
+		right:		100%;
+	}
+	.sidebar {
+		float:		left;
+		right:		@sidebar_width + @sidebar_margin;
+	}
+
+}
