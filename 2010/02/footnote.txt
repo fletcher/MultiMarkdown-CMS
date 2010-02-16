@@ -1,0 +1,15 @@
+Title:	Footnote test  
+Date:	02/15/2010 20:16:15 
+Tags:	
+
+
+
+This is a test footnote [^footnote]. The link to the footnote will work with
+the "advanced" branch of MMD-CMS, but not the regular ("master") branch.
+
+If this is a problem, I suggest getting the regular version working, and then
+upgrading to the advanced version (which will possibly require a change to
+your web server setup).
+
+
+[^footnote]: This is the footnote.
