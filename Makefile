@@ -23,3 +23,5 @@ robots.html::
 
 clean:
 	rm $(htmlfiles)
+
+fast: $(htmlfiles)
