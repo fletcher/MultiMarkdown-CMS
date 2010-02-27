@@ -19,7 +19,7 @@ robots.html::
 %.html: %.txt $(templates)
 # Fix the path to mmd2web (or your preferred command)
 	mmd2web.pl $*.txt
-	chmod 755 $*.html
+	chmod 755  $*.html
 
 clean:
 	rm $(htmlfiles)
