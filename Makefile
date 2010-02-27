@@ -18,7 +18,7 @@ robots.html::
 
 %.html: %.txt $(templates)
 # Fix the path to mmd2web (or your preferred command)
-	~/Documents/Dropbox/MMDSuite/MMD/bin/mmd2web.pl $*.txt
+	mmd2web.pl $*.txt
 	chmod 755 $*.html
 
 clean:
