@@ -17,7 +17,7 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import url(/css/layout.css);		/* Import layout code */
+@import "layout.css";		/* Import layout code */
 
 /* Default Settings */
 
