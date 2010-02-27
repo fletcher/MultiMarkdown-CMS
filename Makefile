@@ -1,5 +1,5 @@
 # Makefile for MultiMarkdown-CMS based wikis
-# Thanks to Dr. Drang for inspiring me to do this:
+# Thanks to Dr. Drang for inspiring me to use make:
 #	http://www.leancrew.com/all-this/2008/06/my-no-server-personal-wiki—part-3/
 
 #
