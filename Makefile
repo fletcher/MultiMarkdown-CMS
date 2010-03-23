@@ -20,7 +20,7 @@ cgi/vector_index: $(htmlfiles)
 	cd cgi; ./map_my_site.pl > vector_index
 
 
-%.html: %.txt $(templates)
+%.html: %.txt # $(templates)
 # Fix the path to mmd2web (or your preferred command)
 	mmd2web.pl $*.txt
 	chmod 755  $*.html
