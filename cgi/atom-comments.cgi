@@ -43,7 +43,7 @@ local $/;
 
 my $max_count = 25;
 
-print "Content-type: text/html\n\n";
+print "Content-type: application/atom+xml\n\n";
 
 # Get commonly needed paths
 my ($site_root, $requested_url, $document_url) 
