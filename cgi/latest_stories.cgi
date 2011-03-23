@@ -90,7 +90,7 @@ sub index_file {
 		my $data = <FILE>;
 		close FILE;
 		
-		if ($data =~ /<meta name="Date" content="(.*?)"\/>/) {
+		if ($data =~ /<meta name="Date" content="(.*?)"\/>/i) {
 			$date = $1;
 			$date =~ s/(\d\d)\/(\d\d)\/(\d\d\d\d).*/$3.$1.$2/;
 			$month = $1;
