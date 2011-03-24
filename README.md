@@ -5,6 +5,12 @@ Tags:	MultiMarkdown, web, server
 
 # Introduction #
 
+***NOTE**: MultiMarkdown CMS is now updated to work with MMD 3.0. If you need
+a version that is compatible with MMD 2.0, you can choose an older version
+from the [downloads] page. MMD 3.0 must be installed separately.*
+
+[downloads]: https://github.com/fletcher/MultiMarkdown-CMS/downloads
+
 MultiMarkdown CMS  is basically a collection  of utilities that allows  you to
 run a web site without any other  software. I have tried a variety of packages
 when hosting my own web site. In the end, however, I was basically using those
@@ -71,7 +77,7 @@ become clear later.
 # How do I install it? #
 
 Once you download and unpack the  software, place the directory where your web
-server software expects it.
+server software expects it, and rename it as desired.
 
 *Please note: if you have trouble installing  the software, do a web search to
 figure out what to do. I'm happy to help troubleshoot my software, but I don't
@@ -90,7 +96,8 @@ And see *something* --- it will likely give you some error messages, however.
 
 # How to configure Apache #
 
-Version 2 of MultiMarkdown CMS is much easier to install.  You are only required to modify your Apache configuration files so that:
+MultiMarkdown CMS is fairly easy to install with Apache. You are only required
+to modify your Apache configuration files so that:
 
 	AllowOverride none
 
@@ -364,38 +371,20 @@ Used to find similar pages, and perform searches of site content.
 Used by my VectorMap searching software to improve results
 
 
-## MultiMarkdown ##
+## MultiMarkdown 3.0 ##
 
 * by Fletcher T. Penney
-* <http://fletcherpenney.net/multimarkdown/>
+* <http://fletcherpenney.net/mmd/>
 
 MultiMarkdown is my update to John Gruber's
-[Markdown](http://daringfireball.net/projects/markdown/) software.
+[Markdown](http://daringfireball.net/projects/markdown/) syntax, and built
+using modifications to [peg-markdown](https://github.com/jgm/peg-markdown) by
+John MacFarlane.
 
-
-## SmartyPants ##
-
-* by John Gruber
-* <http://daringfireball.net/projects/smartypants/>
-
-SmartyPants is another program by John  Gruber, and is designed to add "smart"
-typography to HTML  documents, including proper quotes,  dashes, and ellipses.
-Additionally, there are several variations  of the SmartyPants files to handle
-different localizations  (specifically, Dutch,  French, German,  and Swedish).
-These localizations were provided by Joakim Hertze.
-
-
-## Text::ASCIIMathML ##
-
-* by Mark Nodine
-* <http://search.cpan.org/~nodine/>
-
-This  perl module  adds support  for  converting the  ASCIIMathML syntax  into
-MathML markup suitable for inclusion in XHTML documents.
 
 # License #
 
-	Copyright (C) 2010  Fletcher T. Penney <fletcher@fletcherpenney.net>
+	Copyright (C) 2010-2011  Fletcher T. Penney <fletcher@fletcherpenney.net>
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
