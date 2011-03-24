@@ -22,7 +22,7 @@ cgi/vector_index: $(htmlfiles)
 
 
 %.html: %.txt # $(templates)
-	cgi/mmd2web.pl $*.txt
+	cgi/mmd2web $*.txt
 	chmod 755  $*.html
 
 
