@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# mmd2web --- MultiMarkdown convenience script
+#	<http://fletcherpenney.net/multimarkdown/>
+#	Copyright (c) 2010-2011 Fletcher T. Penney
+#
+# Pass arguments on to the binary to convert text to XHTML
+#	and post-process using XSLT for MultiMarkdown-CMS
+#
+
+# Requires that MMD 3.0 be installed
+# Modify the next command if MMD is not installed in:
+#	/usr/local/bin/multimarkdown
+
+# Be sure to include multimarkdown in our PATH
+export PATH="/usr/local/bin:$PATH"
+
+
+# Locate XSLT directory
+xslt_path=`dirname "$0"`
+
+
+if [ $# = 0 ]
+then
+	# No arguments, so use stdin/stdout
+	
+	# Need a temporary file
+	file_name=`mktemp mmdtempXXXX.txt`
+	
+	cat > $file_name
+	
+	# Determine stylesheet to use
+	mode="xhtml-static-site.xslt"
+
+	multimarkdown "$file_name" | xsltproc -nonet -novalid $xslt_path/XSLT/$mode -
+	shift
+
+	rm $file_name
+else
+until [ "$*" = "" ]
+do
+	# process each argument separately
+	file_name=`echo $1| sed 's/\.[^.]*$//'`
+	
+	# Determine stylesheet to use
+	mode="xhtml-static-site.xslt"
+	
+	multimarkdown "$1" | xsltproc -nonet -novalid $xslt_path/XSLT/$mode - > "$file_name.html"
+	shift
+done
+fi
+
+

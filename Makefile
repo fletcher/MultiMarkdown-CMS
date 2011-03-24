@@ -4,7 +4,8 @@
 
 
 #
-# NOTE: You must customize the path to the mmd2web utility!!!
+# NOTE: MultiMarkdown 3.0 must be installed for this to work.
+#s
 
 srcfiles := $(filter-out cgi/* templates/* css/* images/* robots.txt, $(wildcard *.txt */*.txt */*/*.txt */*/*/*.txt))
 
@@ -21,8 +22,7 @@ cgi/vector_index: $(htmlfiles)
 
 
 %.html: %.txt # $(templates)
-# Fix the path to mmd2web (or your preferred command)
-	mmd2web.pl $*.txt
+	cgi/mmd2web.pl $*.txt
 	chmod 755  $*.html
 
 
