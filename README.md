@@ -382,6 +382,14 @@ using modifications to [peg-markdown](https://github.com/jgm/peg-markdown) by
 John MacFarlane.
 
 
+# Known Issues #
+
+* Email is "de-obfuscated" when run through an XSLT, and it appears there is
+  no (straightforward) way around this. Not that this does *not* affect email
+  addresses that are placed in your HTML include statements --- in a sidebar,
+  for example.
+
+
 # License #
 
 	Copyright (C) 2010-2011  Fletcher T. Penney <fletcher@fletcherpenney.net>
