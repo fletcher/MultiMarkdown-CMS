@@ -46,7 +46,7 @@
 </xsl:text>
 	</xsl:variable>
 	
-	<xsl:output method="html" doctype-system="about:legacy-compat" />
+	<xsl:output method="html" encoding="US-ASCII" doctype-system="about:legacy-compat" />
    
 <!--	<xsl:output method='xml' encoding="US-ASCII" version="1.0" doctype-public="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" doctype-system="http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd" indent="no"/>
 -->
