@@ -162,13 +162,13 @@ RewriteRule ^(.*?)/?$ %{ENV:Base_URL}/$1/index.html [L,QSA]
 # following lines.  FYI - MathML will not work properly in HTML, but
 # everything else should.
 
-RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
-RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
-RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
-RewriteCond %{REQUEST_URI} \.html$
-RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]
-RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
-RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
-RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
-RewriteCond %{REQUEST_URI} !\.
-RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]
+# RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
+# RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
+# RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
+# RewriteCond %{REQUEST_URI} \.html$
+# RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]
+# RewriteCond %{HTTP_ACCEPT} application/xhtml\+xml
+# RewriteCond %{HTTP_ACCEPT} !application/xhtml\+xml\s*;\s*q=0\.?0*(\s|,|$)
+# RewriteCond %{REQUEST_URI} !(notfound.html|test.html)$
+# RewriteCond %{REQUEST_URI} !\.
+# RewriteRule .* - [T=application/xhtml+xml;charset=UTF-8]
