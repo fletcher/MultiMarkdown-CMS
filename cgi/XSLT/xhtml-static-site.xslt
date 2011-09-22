@@ -37,8 +37,7 @@
 	
 <xsl:stylesheet
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	exclude-result-prefixes="html xsl"
+	exclude-result-prefixes="xsl"
 	version="1.0">
 
 	<xsl:variable name="newline">
@@ -65,6 +64,8 @@
 			<xsl:text disable-output-escaping="yes"><![CDATA[<!--#include virtual="${Base_URL}/templates/head.html" -->]]></xsl:text>
 		</xsl:copy>
 	</xsl:template>
+
+	<xsl:template match="meta[@charset != '']"/>
 
 	<xsl:template match="body">
 		<xsl:copy>
