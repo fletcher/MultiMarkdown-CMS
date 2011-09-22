@@ -9,6 +9,8 @@ Tags:	MultiMarkdown, web, server
 a version that is compatible with MMD 2.0, you can choose an older version
 from the [downloads] page. MMD 3.0 must be installed separately.*
 
+*Also, please note that MMD-CMS has been modified to output HTML that should be compatible with HTML5, in ancticipation of these changes being made in MMD as well.*
+
 [downloads]: https://github.com/fletcher/MultiMarkdown-CMS/downloads
 
 MultiMarkdown CMS  is basically a collection  of utilities that allows  you to
@@ -26,13 +28,13 @@ The basic premise is:
 
 * Create a plain text file (in MMD syntax) for each page of the site
 
-* use `mmd2web.pl`  to convert  to XHTML,  including some  markup to  format 
+* use `mmd2web.pl`  to convert  to HTML,  including some  markup to  format 
   the pages for the web site
 
-* upload the XHTML file (and optionally the txt file) to your web server, and
+* upload the HTML file (and optionally the txt file) to your web server, and
   you're off
 
-The newly  formatted XHTML file  includes SSI code  that causes Apache  to add
+The newly  formatted HTML file  includes SSI code  that causes Apache  to add
 certain templates to  the page. This allows you to  standardize the appearance
 of each page (e.g. headers, footers, sidebar, etc).
 
@@ -223,7 +225,7 @@ features:
   sidebar with a  simple keyword  switch in `header.html`  --- `rightmenu`  vs
   `leftmenu` (thanks to [Matthew James Taylor][MJT])
 
-* valid XHTML 1.1 valid CSS
+* valid HTML 5 & valid CSS, with the exception of unsupported `<meta>` elements if you have metadata
 
 These features are  all demonstrated by the default configuration  - feel free
 to modify the scripts as needed for your own requirements.
