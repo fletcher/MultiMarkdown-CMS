@@ -72,7 +72,7 @@ ErrorDocument 404 /notfound.html
 Options +Includes +FollowSymLinks +ExecCGI +Indexes
 XBitHack Full
 
-AddCharset UTF-8 .html
+# AddCharset UTF-8 .html
 
 AddHandler server-parsed .html
 AddHandler cgi-script .cgi
