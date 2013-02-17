@@ -92,7 +92,7 @@ sub index_file {
 		
 		if ($data =~ /<meta\s*name="Date"\s*content="(.*?)"\/?>/i) {
 			$date = $1;
-			$date =~ s/(\d\d)\/(\d\d)\/(\d\d\d\d).*/$3.$1.$2/;
+			$date =~ s/(\d?\d)\/(\d\d)\/(\d\d\d\d).*/$3.$1.$2/;
 			$month = $1;
 			$day = $2;
 			$year = $3;
