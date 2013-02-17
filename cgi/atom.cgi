@@ -90,7 +90,7 @@ sub index_file {
 
 		if ($data =~ /<meta name="Date" content="(.*?)"\/>/i) {
 			$date = $1;
-			$date =~ s/(\d\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
+			$date =~ s/(\d?\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
 		}
 		if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
 			my $title = $1;

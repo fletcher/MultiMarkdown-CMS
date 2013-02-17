@@ -107,7 +107,7 @@ sub index_file {
 
 			$comment =~ /DATE:\s*(.*?)$/m;
 			my $date = $1;
-			$date =~ s/(\d\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
+			$date =~ s/(\d?\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
 
 			$comment =~ /COMMENT:\s*(.*)$/s;
 			my $body = $1;
