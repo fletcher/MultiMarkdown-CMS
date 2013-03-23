@@ -88,7 +88,7 @@ sub index_file {
 		my $data = <FILE>;
 		close FILE;
 
-		if ($data =~ /<meta\s*name="Date"\s*content="(.*?)"\/>/i) {
+		if ($data =~ /<meta\s*name="Date"\s*content="(.*?)"\/?>/i) {
 			$date = $1;
 			$date =~ s/(\d?\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
 		}
