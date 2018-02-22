@@ -37,16 +37,22 @@
 	
 <xsl:stylesheet
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="xsl"
 	version="1.0">
+
 
 	<xsl:variable name="newline">
 <xsl:text>
 </xsl:text>
 	</xsl:variable>
 	
-	<xsl:output method="html" encoding="US-ASCII" doctype-system="about:legacy-compat" />
-   
+	<xsl:output method="html" 
+		doctype-system="about:legacy-compat"
+		omit-xml-declaration="yes"
+		encoding="UTF-8" 
+		indent="yes" />
+
 <!--	<xsl:output method='xml' encoding="US-ASCII" version="1.0" doctype-public="-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" doctype-system="http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd" indent="no"/>
 -->
 
@@ -58,26 +64,32 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="head">
+	<xsl:template match="xhtml:html">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xhtml:head">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
 			<xsl:text disable-output-escaping="yes"><![CDATA[<!--#include virtual="${Base_URL}/templates/head.html" -->]]></xsl:text>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="meta[@charset != '']"/>
+	<xsl:template match="xhtml:meta[@charset != '']"/>
 
-	<xsl:template match="body">
+	<xsl:template match="xhtml:body">
 		<xsl:copy>
 			<xsl:text disable-output-escaping="yes"><![CDATA[<!--#include virtual="${Base_URL}/templates/header.html" -->]]></xsl:text>
-			<xsl:if test="/html/head/title != ''">
-				<h1 class="page-title"><xsl:value-of select="/html/head/title"/></h1>
+			<xsl:if test="/xhtml:html/xhtml:head/xhtml:title != ''">
+				<h1 xmlns="http://www.w3.org/1999/xhtml" class="page-title"><xsl:value-of select="/xhtml:html/xhtml:head/xhtml:title"/></h1>
 			</xsl:if>
-			<xsl:if test="/html/head/meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'date']/@content != ''">
-				<div class="date"><xsl:value-of select="/html/head/meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'date']/@content"/>
+			<xsl:if test="/xhtml:html/xhtml:head/xhtml:meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'date']/@content != ''">
+				<div xmlns="http://www.w3.org/1999/xhtml" class="date"><xsl:value-of select="/xhtml:html/xhtml:head/xhtml:meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'date']/@content"/>
 				</div>
 			</xsl:if>
-			<xsl:if test="/html/head/meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'tags']/@content != ''">
+			<xsl:if test="/xhtml:html/xhtml:head/xhtml:meta[translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz') = 'tags']/@content != ''">
 				<xsl:text disable-output-escaping="yes"><![CDATA[<!--#include virtual="${Base_URL}/cgi/tags.cgi" -->]]></xsl:text>
 			</xsl:if>
 			<xsl:apply-templates select="@*|node()"/>

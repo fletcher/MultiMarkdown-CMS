@@ -20,6 +20,9 @@
 
 use warnings;
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use XML::Atom::SimpleFeed;
 use File::Find;
 use CGI;
@@ -32,10 +35,17 @@ if ($ENV{HTTP_HOST}) {
 	$host = "127.0.0.1";
 }
 
+my $base;
+if ($ENV{Base_URL}) {
+	$base = $ENV{Base_URL};
+} else {
+	$base = "";
+}
+
 my $feed = XML::Atom::SimpleFeed->new(
 	title	=> "$host",
-	link	=> "http://$host$ENV{Base_URL}/",
-	link    => { rel => 'self', href => "http://$host$ENV{Base_URL}/atom.xml", },
+	link	=> "http://$host$base/",
+	link    => { rel => 'self', href => "http://$host$base/atom.xml", },
 	author	=> 'MultiMarkdown CMS',
 );
 
@@ -62,9 +72,10 @@ foreach my $date (sort {$b cmp $a} keys %pages) {
 			my $title = $pages{$date}{$filepath};
 			my $content = $pages{$date}{$filepath}{body};
 			$filepath =~ s/^$site_root//;
+
 			$feed->add_entry(
 				title	=> $title,
-				link	=> "http://$host$ENV{Base_URL}$filepath",
+				link	=> "http://$host$base$filepath",
 				updated => $date,
 				content	=> $content,
 			);
@@ -92,7 +103,7 @@ sub index_file {
 			$date = $1;
 			$date =~ s/(\d?\d)\/(\d\d)\/(\d\d\d\d).*?(\d\d:\d\d:\d\d).*/$3-$1-$2T$4-04:00/;
 		}
-		if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
+		if ($data =~ /<h1 (?:xmlns="" )?class="page-title">(.*)<\/h1>/) {
 			my $title = $1;
 			$pages{$date}{$filepath} = $title;
 		}

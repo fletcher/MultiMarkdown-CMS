@@ -18,9 +18,11 @@
 #    59 Temple Place, Suite 330
 #    Boston, MA 02111-1307 USA
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use MultiMarkdownCMS;
 my $debug = 0;			# Enables extra output for debugging
-
 
 print "Content-type: text/html\n\n";
 
@@ -55,7 +57,7 @@ my $content = "";
 foreach my $filepath (glob("$search_path*/index.html")) {
 	open (FILE, "<$filepath");
 	my $data = <FILE>;
-	if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
+	if ($data =~ /<h1 (?:xmlns="" )?class="page-title">(.*)<\/h1>/) {
 		my $title = $1;
 		$filepath =~ /$site_root\/(.*\/)index.html/;
 		$content .= "<li><a href=\"/$1\">$title</a></li>\n";		

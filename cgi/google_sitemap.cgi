@@ -21,6 +21,9 @@
 use strict;
 use warnings;
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use File::Find;
 use CGI;
 use MultiMarkdownCMS;

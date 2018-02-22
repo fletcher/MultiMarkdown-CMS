@@ -19,6 +19,9 @@
 #    Boston, MA 02111-1307 USA
 
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use CGI;
 use File::Find;
 use MultiMarkdownCMS;

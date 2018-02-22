@@ -21,6 +21,10 @@
 
 use warnings;
 use strict;
+
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use Net::OpenID::Consumer;
 use LWP::UserAgent;
 use CGI;

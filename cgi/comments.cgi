@@ -21,6 +21,9 @@
 use strict;
 use warnings;
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use IO::String;
 use CGI;
 use MultiMarkdownCMS;
@@ -101,7 +104,7 @@ $body
 print qq{
 <h2 id="leave-comment">Leave a comment</h2>
 <div id="commenter-greeting">
-	<script type="text/javascript">
+	<script>
 		writeCommenterGreeting();
 	</script>
 </div>

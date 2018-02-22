@@ -32,7 +32,7 @@ then
 	# Determine stylesheet to use
 	mode="xhtml-static-site.xslt"
 
-	multimarkdown "$file_name" | xsltproc -nonet -novalid $xslt_path/XSLT/$mode -
+	multimarkdown "$file_name" | xsltproc --nonet --novalid $xslt_path/XSLT/$mode -
 	shift
 
 	rm $file_name
@@ -45,7 +45,7 @@ do
 	# Determine stylesheet to use
 	mode="xhtml-static-site.xslt"
 	
-	multimarkdown "$1" | xsltproc -nonet -novalid $xslt_path/XSLT/$mode - > "$file_name.html"
+	multimarkdown "$1" | xsltproc --nonet --novalid $xslt_path/XSLT/$mode - > "$file_name.html"
 	shift
 done
 fi

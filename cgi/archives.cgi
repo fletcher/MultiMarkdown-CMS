@@ -18,6 +18,9 @@
 #    59 Temple Place, Suite 330
 #    Boston, MA 02111-1307 USA
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use MultiMarkdownCMS;
 
 my $debug = 0;			# Enables extra output for debugging
@@ -52,7 +55,7 @@ if ($requested_url =~ /^\/?(\d\d\d\d).*?(\d\d)/) {
 		if ($filepath !~ /index.html$/) {
 			open (FILE, "<$filepath");
 			my $data = <FILE>;
-			if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
+			if ($data =~ /<h1 (?:xmlns="" )?class="page-title">(.*)<\/h1>/) {
 				my ($title, $date) = ($1,"");
 				if ($data =~ /<meta\s*name="Date"\s*content="(.*?)"\/?>/i) {
 					$date = $1;

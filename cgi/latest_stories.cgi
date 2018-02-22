@@ -20,6 +20,9 @@
 
 use warnings;
 
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use File::Find;
 use MultiMarkdownCMS;
 
@@ -98,8 +101,8 @@ sub index_file {
 			$year = $3;
 		}
 
-		if ($data =~ /<h1 class="page-title">(.*)<\/h1>/) {
-			my $title = $1;
+		if ($data =~ /<h1(\s*xmlns=\"\"\s*)? class="page-title">(.*)<\/h1>/) {
+			my $title = $2;
 			$pages{$year}{$month}{$day}{$filepath} = $title;
 		}
 	}

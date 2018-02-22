@@ -20,6 +20,10 @@
 
 use strict;
 use warnings;
+
+use FindBin qw( $RealBin );
+use lib $RealBin;
+
 use VectorMap;
 use File::Find;
 use MultiMarkdownCMS;

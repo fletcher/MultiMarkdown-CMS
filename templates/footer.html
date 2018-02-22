@@ -1,7 +1,7 @@
 <!--#if expr='v("DOCUMENT_NAME") =~ /index.html/' -->
 <!--#include virtual="../cgi/pages_in_category.cgi" -->
 <!--#include virtual="../cgi/similar_pages.cgi" -->
-<!--#if expr='v("DOCUMENT_NAME") =~ /archives.html/' -->
+<!--#elif expr='v("DOCUMENT_NAME") =~ /archives.html/' -->
 <!--#else -->
 <!--#include virtual="../cgi/similar_pages.cgi" -->
 <!--#include virtual="../cgi/comments.cgi" -->
