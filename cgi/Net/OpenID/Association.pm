@@ -12,7 +12,7 @@ use fields (
             );
 
 use Storable ();
-use Digest::SHA1 qw(sha1);
+use Digest::SHA qw(sha1);
 
 sub new {
     my Net::OpenID::Association $self = shift;

@@ -32,7 +32,7 @@ use Net::OpenID::IndirectMessage;
 use Net::OpenID::URIFetch;
 
 use MIME::Base64 ();
-use Digest::SHA1 ();
+use Digest::SHA ();
 use Crypt::DH 0.05;
 use Time::Local;
 use HTTP::Request;
